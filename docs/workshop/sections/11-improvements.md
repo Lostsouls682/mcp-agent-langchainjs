@@ -16,13 +16,14 @@ In order to do that, we'll improve our original prompt. Open the file `packages/
 
 ```md
 ## Task
+
 1. Help the user with their request, ask any clarifying questions if needed.
 2. ALWAYS generate 3 very brief follow-up questions that the user would likely ask next, as if you were the user.
-Enclose the follow-up questions in double angle brackets. Example:
-<<Do you have vegan options?>>
-<<How can I cancel my order?>>
-<<What are the available sauces?>>
-Make sure the last question ends with ">>", and phrase the questions as if you were the user, not the assistant.
+   Enclose the follow-up questions in double angle brackets. Example:
+   <<Do you have vegan options?>>
+   <<How can I cancel my order?>>
+   <<What are the available sauces?>>
+   Make sure the last question ends with ">>", and phrase the questions as if you were the user, not the assistant.
 ```
 
 Let's analyze this prompt to understand what's going on:
@@ -30,11 +31,11 @@ Let's analyze this prompt to understand what's going on:
 1. We ask the model to generate 3 follow-up questions: `Generate 3 very brief follow-up questions that the user would likely ask next.`
 2. We specify the format of the follow-up questions: `Enclose the follow-up questions in double angle brackets.`
 3. We use the few-shot approach to give examples of follow-up questions:
-    ```
-    <<Do you have vegan options?>>
-    <<How can I cancel my order?>>
-    <<What are the available sauces?>>
-    ```
+   ```
+   <<Do you have vegan options?>>
+   <<How can I cancel my order?>>
+   <<What are the available sauces?>>
+   ```
 4. After testing, we improved the prompt with: `Make sure the last question ends with ">>".` and `phrase the questions as if you were the user, not the assistant.`.
 
 <div class="info" data-title="Note">
@@ -58,5 +59,5 @@ You can now redeploy your improved agent by running `azd deploy agent-api` and t
 
 The current version of the chat API is using the `chat` endpoint to send the messages and get the response once the model has finished generating it. This creates longer wait times for the user, which is not ideal.
 
-OpenAI API have an option to stream the response message, allowing to see the response as soon as it's generated. 
+OpenAI API have an option to stream the response message, allowing to see the response as soon as it's generated.
 While it doesn't make the model generate the response faster, it allows you to display the response to the user faster so they can start reading it directly while it's being generated. -->

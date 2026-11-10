@@ -6,7 +6,7 @@ When integrated in existing systems, like in this case a burger ordering service
 
 <div class="warning" data-title="Accuracy in Generative AI">
 
-> Large Language Models (LLMs), like the ones powering ChatGPT, do not have by design direct access to the external world. They may produce "hallucinations", offering responses that seem authoritative but are factually incorrect. It's crucial to **inform users that the responses are AI-generated**. During this workshop, we'll explore how to provide LLMs a limited access to external information sources and possible actions, allowing them to *ground* their answers and reduce hallucinations.
+> Large Language Models (LLMs), like the ones powering ChatGPT, do not have by design direct access to the external world. They may produce "hallucinations", offering responses that seem authoritative but are factually incorrect. It's crucial to **inform users that the responses are AI-generated**. During this workshop, we'll explore how to provide LLMs a limited access to external information sources and possible actions, allowing them to _ground_ their answers and reduce hallucinations.
 
 </div>
 
@@ -53,6 +53,7 @@ For common use cases like our burger ordering assistant, AI agents can follow th
 ![Simple agent loop workflow](./assets/agent-loop.drawio.png)
 
 The flow goes like this:
+
 1. The user send in a query, like “order a vegan burger”.
 2. The LLM decides which tool to call.
 3. Based on the feedback from the tool calling, it decides the next action: call another tool, or return the final answer.

@@ -45,11 +45,7 @@ export const chatDefaultOptions: ChatComponentOptions = {
   enableMarkdown: true,
   enableDebug: true,
   minStepDisplayMs: 1000,
-  promptSuggestions: [
-    'Help me find my perfect burger',
-    'Show me the toppings',
-    'I would like a vegan burger',
-  ],
+  promptSuggestions: ['Help me find my perfect burger', 'Show me the toppings', 'I would like a vegan burger'],
   messages: [],
   strings: {
     promptSuggestionsTitle: 'Welcome to Tom Project — what sounds good?',

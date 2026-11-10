@@ -30,10 +30,10 @@ The beer data and vector embeddings are stored in [Azure Cosmos DB](https://lear
 
 The Beer MCP server provides the following tools:
 
-| Tool Name        | Description                                                                 |
-| ---------------- | --------------------------------------------------------------------------- |
-| recommend_beers  | Recommend beers based on a natural language query (returns top 5 results)   |
-| get_beer_by_id   | Get a specific beer by its ID                                               |
+| Tool Name       | Description                                                               |
+| --------------- | ------------------------------------------------------------------------- |
+| recommend_beers | Recommend beers based on a natural language query (returns top 5 results) |
+| get_beer_by_id  | Get a specific beer by its ID                                             |
 
 ## Enable and test
 
@@ -46,6 +46,7 @@ If you have GitHub Copilot, simply send `/enable-beer` to the agent, in the chat
 ### Manual setup
 
 1. Set the `ENABLE_BEERS` environment variable:
+
    ```bash
    azd env set ENABLE_BEERS true
    ```
@@ -58,7 +59,7 @@ If you have GitHub Copilot, simply send `/enable-beer` to the agent, in the chat
    ```bash
    azd up
    ```
-   
+
 ## Test with MCP inspector
 
 1. Start the Beer MCP server locally.

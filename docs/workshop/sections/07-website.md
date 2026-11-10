@@ -1,6 +1,7 @@
 <div class="info" data-title="Skip notice">
 
 > If you want to skip the Chat website implementation and jump directly to the next section, run this command in the terminal **at the root of the project** to get the completed code directly:
+>
 > ```bash
 > curl -fsSL https://github.com/Azure-Samples/mcp-agent-langchainjs/releases/download/latest/agent-webapp.tar.gz | tar -xvz
 > ```
@@ -66,7 +67,7 @@ protected renderLoader = () =>
 
 ### Calling the agent API
 
-Now we need to call the agent API we created earlier. For this, we need to edit the `src/api.ts` file and complete the code where the  `TODO` comment is:
+Now we need to call the agent API we created earlier. For this, we need to edit the `src/api.ts` file and complete the code where the `TODO` comment is:
 
 ```ts
 // TODO: complete call to the agent API
@@ -85,14 +86,14 @@ We'll handle the errors and parsing of the stream response after, so for now jus
 <summary>Click here to see an example solution</summary>
 
 ```ts
-  const response = await fetch(`${apiUrl}/api/chats/stream`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      messages: options.messages,
-      context: options.context || {},
-    }),
-  });
+const response = await fetch(`${apiUrl}/api/chats/stream`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    messages: options.messages,
+    context: options.context || {},
+  }),
+});
 ```
 
 </details>
@@ -108,15 +109,15 @@ To do this, we can check the `response.ok` property after the fetch call, and th
 Add the following code after the fetch call to handle errors:
 
 ```ts
-  if (response.status > 299 || !response.ok) {
-    let json: JSON | undefined;
-    try {
-      json = await response.json();
-    } catch {}
+if (response.status > 299 || !response.ok) {
+  let json: JSON | undefined;
+  try {
+    json = await response.json();
+  } catch {}
 
-    const error = json?.['error'] ?? response.statusText;
-    throw new Error(error);
-  }
+  const error = json?.['error'] ?? response.statusText;
+  throw new Error(error);
+}
 ```
 
 If we get an error, we still try to parse the response body as JSON to get a more detailed error message. If that fails, we just use the status text as the error message.
@@ -130,7 +131,7 @@ Let's complete the `getCompletion()` first, we'll take care of the streaming aft
 Add this code after the error handling:
 
 ```ts
-  return getChunksFromResponse<AIChatCompletionDelta>(response);
+return getChunksFromResponse<AIChatCompletionDelta>(response);
 ```
 
 #### Parsing the stream
@@ -157,6 +158,7 @@ export async function* getChunksFromResponse<T>(response: Response): AsyncGenera
 ```
 
 Let's break down what this function does:
+
 1. First, notice that we're using an async generator function again, so we can yield multiple values over time and create our stream of JSON objects.
 2. We use the stream transform API to first decode the response body as text, and then parse it as NDJSON (Newline Delimited JSON). Since there's no built-in NDJSON parser in the browser, we'll implement our own after this.
 3. We get a reader from the transformed stream, and read the value it returns (the JSON chunks). Finally, we yield each chunk converted to the type we expect, in our case `AIChatCompletionDelta`.

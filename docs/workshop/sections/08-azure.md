@@ -24,7 +24,7 @@ Begin by logging into your Azure subscription with the following command:
 azd auth login --use-device-code
 ```
 
-This command will provide you a *device code* to enter in a browser window. Follow the prompts until you're notified of a successful login.
+This command will provide you a _device code_ to enter in a browser window. Follow the prompts until you're notified of a successful login.
 
 #### Create a new environment
 
@@ -47,15 +47,19 @@ azd env set AZURE_OPENAI_ALT_ENDPOINT $$proxy$$
 <div class="important" data-title="Important">
 
 > If you're using an Azure for Students or Free Trial account that you just created, you need to run the following command:
+>
 > ```sh
 > azd env set AZURE_OPENAI_MODEL_CAPACITY 1
 > ```
+>
 > This ensures that the resources deployed will fit within the free tier limits. **This limitations reduce the capacity for AI models usage, so you'll also have to provide another OpenAI endpoint to use the application properly.** To do that, use the following commands to set the OpenAI endpoint, API key and model you want to use:
+>
 > ```sh
 > azd env set AZURE_OPENAI_ALT_ENDPOINT <your_openai_endpoint>
 > azd env set AZURE_OPENAI_API_KEY <your_openai_api_key>
 > azd env set AZURE_OPENAI_MODEL <your_openai_model>
 > ```
+>
 > You can for example use the free [GitHub Models](https://docs.github.com/github-models/use-github-models/prototyping-with-ai-models#experimenting-with-ai-models-using-the-api) for this, or any other OpenAI compatible endpoint.
 
 </div>
@@ -104,14 +108,14 @@ In our journey to deploy the chat application, we'll be utilizing a suite of Azu
 
 Here's a brief overview of the Azure services we'll use:
 
-| Service | Purpose |
-| ------- | ------- |
-| [Azure Functions](https://learn.microsoft.com/azure/functions/) | Hosts our Node.js MCP server and API endpoints with on-demand  scaling and pricing. |
-| [Azure Static Web Apps](https://learn.microsoft.com/azure/static-web-apps/) | Serves our agent web chat with integrated authentication, and global distribution. |
-| [Azure Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/) | A globally distributed, multi-model database service used to store user, burger and order data. |
-| [Microsoft Foundry](https://learn.microsoft.com/azure/ai-foundry/) | Unified AI platform that we use to run the Azure OpenAI model powering our agent. |
-| [Azure Log Analytics](https://learn.microsoft.com/azure/log-analytics/) | Collects and analyzes telemetry and logs for insights into application performance and diagnostics. |
-| [Azure Monitor](https://learn.microsoft.com/azure/azure-monitor/) | Provides comprehensive monitoring of our applications, infrastructure, and network. |
+| Service                                                                     | Purpose                                                                                             |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| [Azure Functions](https://learn.microsoft.com/azure/functions/)             | Hosts our Node.js MCP server and API endpoints with on-demand scaling and pricing.                  |
+| [Azure Static Web Apps](https://learn.microsoft.com/azure/static-web-apps/) | Serves our agent web chat with integrated authentication, and global distribution.                  |
+| [Azure Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/)             | A globally distributed, multi-model database service used to store user, burger and order data.     |
+| [Microsoft Foundry](https://learn.microsoft.com/azure/ai-foundry/)          | Unified AI platform that we use to run the Azure OpenAI model powering our agent.                   |
+| [Azure Log Analytics](https://learn.microsoft.com/azure/log-analytics/)     | Collects and analyzes telemetry and logs for insights into application performance and diagnostics. |
+| [Azure Monitor](https://learn.microsoft.com/azure/azure-monitor/)           | Provides comprehensive monitoring of our applications, infrastructure, and network.                 |
 
 While Azure Log Analytics and Azure Monitor aren't depicted in the initial diagram, they're integral to our application's observability, allowing us to troubleshoot and ensure our application is running optimally.
 
@@ -123,7 +127,7 @@ Key features of Azure Functions include:
 
 - **Serverless scaling**: Automatically scales up or down, even to zero, to match demand.
 - **Event-driven**: Can be triggered by various events, such as HTTP requests, timers, or messages from other Azure services.
-- **Multiple language support**: Supports various programming languages, including JavaScript and Node.js. 
+- **Multiple language support**: Supports various programming languages, including JavaScript and Node.js.
 
 ![Azure compute options spectrum](./assets/azure-compute-services.png)
 

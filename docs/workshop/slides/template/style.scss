@@ -1,44 +1,43 @@
-@use "sass:math";
-@use "sass:color";
+@use 'sass:math';
+@use 'sass:color';
 
 // Theme
 // ---------------------------------------------------------------------------
 
 // Framework colors
-$angular:   darken(#e80032, 7);
-$react:     darken(#66dbf9, 20);
-$vue:       darken(#4bde9c, 15);
+$angular: darken(#e80032, 7);
+$react: darken(#66dbf9, 20);
+$vue: darken(#4bde9c, 15);
 
 // Brand colors
 $dark-blue: darken(#0078d7, 5%);
-$medium-blue: darken(#00A9CD, 10%);
-$blue   : #00A4EF;
-$orange : darken(#FFB900, 0%);
-$green  : #7FBA00;
-$yellow : #FCBC2B;
-$red    : #F25022;
-$grey   : #717583;
+$medium-blue: darken(#00a9cd, 10%);
+$blue: #00a4ef;
+$orange: darken(#ffb900, 0%);
+$green: #7fba00;
+$yellow: #fcbc2b;
+$red: #f25022;
+$grey: #717583;
 $dark-grey: #373432;
 
 $nest-red: #ea2845;
 
 // Remark theme
-$primary          : $dark-blue;
-$secondary        : $orange;
-$tertiary         : $blue;
-$light            : #fff;
-$dark             : $dark-grey;
-$text-dark        : $dark-grey; 
-$text-light       : $light;
-$code-background  : #F8F8F8;
-$table-border     : #ccc;
-$font-size        : 28px;
-$text-big         : 72px;
-$font             : 'Archivo', Arial, Helvetica, sans-serif;
-$font-title       : 'Saira', Arial, Helvetica, sans-serif;
-$font-fixed       : 'Inconsolata', monospace;
-$margin-base      : 20px;
-
+$primary: $dark-blue;
+$secondary: $orange;
+$tertiary: $blue;
+$light: #fff;
+$dark: $dark-grey;
+$text-dark: $dark-grey;
+$text-light: $light;
+$code-background: #f8f8f8;
+$table-border: #ccc;
+$font-size: 28px;
+$text-big: 72px;
+$font: 'Archivo', Arial, Helvetica, sans-serif;
+$font-title: 'Saira', Arial, Helvetica, sans-serif;
+$font-fixed: 'Inconsolata', monospace;
+$margin-base: 20px;
 
 // CSS Base
 // ---------------------------------------------------------------------------
@@ -47,52 +46,87 @@ $margin-base      : 20px;
 @import url(fonts.css);
 @import url(fontawesome-all.css);
 
-* { box-sizing: border-box; }
-body { font-family: $font; line-height: 1.26; }
-h1, h2, h3, h4, h5, h6 {
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: $font;
+  line-height: 1.26;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0 0 $margin-base 0;
   font-family: $font-title;
   font-weight: 500;
 }
-h1 { color: $primary; }
-h2 { color: $secondary; }
-h3 { color: $tertiary; }
-li { margin-bottom: .25em };
-pre, code, .pre {
+h1 {
+  color: $primary;
+}
+h2 {
+  color: $secondary;
+}
+h3 {
+  color: $tertiary;
+}
+li {
+  margin-bottom: 0.25em;
+}
+pre,
+code,
+.pre {
   text-align: left;
   font-family: $font-fixed;
   // color: $secondary;
   background: $code-background;
   white-space: pre-wrap;
-  .full &, .impact &, .no-bg & { background: transparent !important; }
+  .full &,
+  .impact &,
+  .no-bg & {
+    background: transparent !important;
+  }
 }
 .pre {
   margin: 1em 0;
   padding: 0.5em;
   display: block;
-  p, div {
+  p,
+  div {
     display: block;
     margin: 0;
     padding: 0;
   }
 }
 
-a, a:visited, a:hover, a:active { color: $text-dark; }
-img { vertical-align: inherit; }
+a,
+a:visited,
+a:hover,
+a:active {
+  color: $text-dark;
+}
+img {
+  vertical-align: inherit;
+}
 blockquote {
   border-left: 8px solid;
-  padding-left: .5em;
+  padding-left: 0.5em;
   color: $tertiary;
   text-align: left;
   margin: 1em 0;
-  & > p { margin: 0; }
+  & > p {
+    margin: 0;
+  }
 
   .light-text & {
     color: $light;
-    text-shadow: 0 0 .5em rgba(0,0,0,.6),
-      0 0 1em rgba(0,0,0,1),
-      0 0 1em rgba(0,0,0,1),
-      0 0 1em rgba(0,0,0,1);
+    text-shadow:
+      0 0 0.5em rgba(0, 0, 0, 0.6),
+      0 0 1em rgba(0, 0, 0, 1),
+      0 0 1em rgba(0, 0, 0, 1),
+      0 0 1em rgba(0, 0, 0, 1);
   }
 
   .inline-block & {
@@ -115,7 +149,7 @@ blockquote {
       display: block;
       content: '“';
       font-size: 5em;
-      margin-top: -.45em;
+      margin-top: -0.45em;
     }
   }
 }
@@ -127,26 +161,29 @@ iframe {
   transform: scale($scale);
   transform-origin: 0 0;
   &.no-zoom {
-    $scale: 1.0;
+    $scale: 1;
     transform: scale($scale);
-    height: calc((100%/$scale) - 1.2em);
-    width: calc(100%/$scale);
+    height: calc((100% / $scale) - 1.2em);
+    width: calc(100% / $scale);
   }
   &.smaller {
     $scale: 1.2;
     transform: scale($scale);
-    height: calc((100%/$scale) - 1.2em);
-    width: calc(100%/$scale);
+    height: calc((100% / $scale) - 1.2em);
+    width: calc(100% / $scale);
   }
 }
 table {
   width: 100%;
   border-collapse: collapse;
   thead {
-    > tr { border-bottom: 1px solid $tertiary; }
+    > tr {
+      border-bottom: 1px solid $tertiary;
+    }
   }
-  th, td {
-    padding: .5em;
+  th,
+  td {
+    padding: 0.5em;
     border: 1px solid $table-border;
   }
   :not(thead) > tr:nth-child(odd) {
@@ -156,15 +193,21 @@ table {
 
 // Remark base
 .remark-code {
-  font-size: .9em;
+  font-size: 0.9em;
   padding: 0.5em;
   display: block;
   overflow-x: auto;
   padding: 0.5em;
 }
-.remark-container { background: #333; }
-.remark-slide-scaler { box-shadow: none; }
-.remark-notes { font-size: 1.5em; }
+.remark-container {
+  background: #333;
+}
+.remark-slide-scaler {
+  box-shadow: none;
+}
+.remark-notes {
+  font-size: 1.5em;
+}
 
 .remark-slide-content {
   font-size: $font-size;
@@ -176,11 +219,13 @@ table {
 .remark-slide-number {
   color: $text-light;
   right: 1em;
-  opacity: .6;
+  opacity: 0.6;
   font-size: 0.8em;
   z-index: 2;
-  transform: translate3d(0,0,0);
-  .no-counter & { display: none; }
+  transform: translate3d(0, 0, 0);
+  .no-counter & {
+    display: none;
+  }
 }
 
 // Overrides
@@ -189,7 +234,7 @@ table {
     h2 {
       border-left: 8px solid;
       font-size: 40px;
-      padding-left: .5em;
+      padding-left: 0.5em;
     }
   }
 }
@@ -203,17 +248,25 @@ table {
   left: 0;
   right: 0;
   font-size: 20px;
-  padding: .8em;
+  padding: 0.8em;
   text-align: left;
   z-index: 1;
-  transform: translate3d(0,0,0);
-  p { margin: 0;}
-  .impact &, .full &, .no-bar & { display: none; }
+  transform: translate3d(0, 0, 0);
+  p {
+    margin: 0;
+  }
+  .impact &,
+  .full &,
+  .no-bar & {
+    display: none;
+  }
 }
 
 .avatar {
   position: relative;
-  &.big { width: 10em; }
+  &.big {
+    width: 10em;
+  }
   &.small {
     display: inline-block;
     width: 4em;
@@ -240,11 +293,17 @@ table {
 }
 
 .full {
-  text-shadow: 0 0 .5em rgba(0,0,0,.6);
-  &, h1, h2 { color: $text-light; }
+  text-shadow: 0 0 0.5em rgba(0, 0, 0, 0.6);
+  &,
+  h1,
+  h2 {
+    color: $text-light;
+  }
   .more-shadow {
-    text-shadow: 0 0 .5em rgba(0,0,0,.6), 0 0 .5em rgba(0,0,0,.6);
-  }  
+    text-shadow:
+      0 0 0.5em rgba(0, 0, 0, 0.6),
+      0 0 0.5em rgba(0, 0, 0, 0.6);
+  }
 }
 
 .impact {
@@ -252,25 +311,41 @@ table {
   background: linear-gradient(110deg, $primary, $blue);
   vertical-align: middle;
   text-align: center;
-  &, h1, h2 { color: $text-light; }
-  h1 { font-size: 2.5em; }
+  &,
+  h1,
+  h2 {
+    color: $text-light;
+  }
+  h1 {
+    font-size: 2.5em;
+  }
 }
 
 .light-all {
-  &, h1, h2 { color: $text-light; }
+  &,
+  h1,
+  h2 {
+    color: $text-light;
+  }
 }
 
 // Utilities
-.float-right { float: right; }
-.float-left { float: left; }
-.clear { clear: both; }
+.float-right {
+  float: right;
+}
+.float-left {
+  float: left;
+}
+.clear {
+  clear: both;
+}
 .side-layer {
   position: absolute;
   left: 0;
   width: 100%;
   padding: 0 2em;
 }
-.full-layer { 
+.full-layer {
   position: absolute;
   top: 0;
   left: 0;
@@ -312,84 +387,254 @@ table {
   }
 }
 .responsive {
-  & > img, & > a > img { width: 100%; height: auto; };
-  &.spaced { & > img, & > a > img { padding: .25em; } }
-  &.spaced-more { & > img, & > a > img { padding: 1em; } }
-  & > object, & > a > object { width: 100%; height: auto; };
+  & > img,
+  & > a > img {
+    width: 100%;
+    height: auto;
+  }
+  &.spaced {
+    & > img,
+    & > a > img {
+      padding: 0.25em;
+    }
+  }
+  &.spaced-more {
+    & > img,
+    & > a > img {
+      padding: 1em;
+    }
+  }
+  & > object,
+  & > a > object {
+    width: 100%;
+    height: auto;
+  }
 }
-.shadow > img { box-shadow: 0 0 10px 0 rgba(0,0,0,.4); }
-.rounded > img, .rounded > video { border-radius: .5em; };
-.circle > img, .circle > video { border-radius: 100%; };
-.top { vertical-align: top; &.override { vertical-align: top !important; } };
-.middle { &, & img, & span { vertical-align: middle; } };
-.baseline { &, & img, & span { vertical-align: baseline; } };
-.bottom { vertical-align: bottom; &.override { vertical-align: bottom !important; } };
-.left, .text-left { text-align: left; }
-.right, .text-right { text-align: right; }
-.center, .text-center { text-align: center; }
-.justify { text-align: justify; }
-.contain { background-size: contain; };
-.bg-bottom { background-position: bottom;}
-.light { background-color: $light; }
-.light-grey { background-color: $grey; }
-.dark { background-color: $dark; }
-.dark-blue { background-color: $dark-blue; }
-.primary { background-color: $primary; };
+.shadow > img {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+}
+.rounded > img,
+.rounded > video {
+  border-radius: 0.5em;
+}
+.circle > img,
+.circle > video {
+  border-radius: 100%;
+}
+.top {
+  vertical-align: top;
+  &.override {
+    vertical-align: top !important;
+  }
+}
+.middle {
+  &,
+  & img,
+  & span {
+    vertical-align: middle;
+  }
+}
+.baseline {
+  &,
+  & img,
+  & span {
+    vertical-align: baseline;
+  }
+}
+.bottom {
+  vertical-align: bottom;
+  &.override {
+    vertical-align: bottom !important;
+  }
+}
+.left,
+.text-left {
+  text-align: left;
+}
+.right,
+.text-right {
+  text-align: right;
+}
+.center,
+.text-center {
+  text-align: center;
+}
+.justify {
+  text-align: justify;
+}
+.contain {
+  background-size: contain;
+}
+.bg-bottom {
+  background-position: bottom;
+}
+.light {
+  background-color: $light;
+}
+.light-grey {
+  background-color: $grey;
+}
+.dark {
+  background-color: $dark;
+}
+.dark-blue {
+  background-color: $dark-blue;
+}
+.primary {
+  background-color: $primary;
+}
 .alt {
   background-color: $secondary;
   background: linear-gradient(110deg, color.adjust($secondary, $hue: -5), $secondary);
-};
-.red { background-color: $red; }
-.primary-text, .primary-text a { color: $primary; }
-.alt-text { color: $secondary; };
-.em-text, .em-text a { color: $tertiary; };
-.dark-text { color: $dark; };
-.light-text, .light-text a { color: $light; };
-.red-text { color: $red; };
-.blue-text { color: $blue; };
-.green-text { color: $green; };
-.grey-text { opacity: 0.5; };
-.big { font-size: 2em; }
-.large { font-size: 1.5em; }
-.small { font-size: .8em; }
-.tiny { font-size: .6em; }
-.thin { font-weight: 200; }
-.strike { text-decoration: line-through; }
-.no-margin { &, & > p, & > pre, & > ul, & > ol, & > blockquote { margin: 0; } }
-.no-padding { padding: 0; }
-.full-width { &, & > p { width: 100%; } }
-.inline-block { p, ul, ol, blockquote { display: inline-block; } }
-.inline-block-left { p, ul, ol, blockquote { text-align: left; } }
-.space-left { padding-left: 1em; }
-.space-right { padding-right: 1em; }
-.margin-left { margin-left: 1em; }
-.margin-right { margin-right: 1em; }
-.margin-top { margin-top: .5em; }
-.margin-bottom { margin-bottom: .5em; }
-.overlay-dark { box-shadow: inset 0 0 0 9999px transparentize(#000, .5); }
-.no-wrap { pre, code { white-space: pre; } }
-.ib { display: inline-block !important; }
-.space { padding-left: 2em; padding-right: 2em; }
-.no-hmargin { h1, h2, h3 { margin: 0; } }
+}
+.red {
+  background-color: $red;
+}
+.primary-text,
+.primary-text a {
+  color: $primary;
+}
+.alt-text {
+  color: $secondary;
+}
+.em-text,
+.em-text a {
+  color: $tertiary;
+}
+.dark-text {
+  color: $dark;
+}
+.light-text,
+.light-text a {
+  color: $light;
+}
+.red-text {
+  color: $red;
+}
+.blue-text {
+  color: $blue;
+}
+.green-text {
+  color: $green;
+}
+.grey-text {
+  opacity: 0.5;
+}
+.big {
+  font-size: 2em;
+}
+.large {
+  font-size: 1.5em;
+}
+.small {
+  font-size: 0.8em;
+}
+.tiny {
+  font-size: 0.6em;
+}
+.thin {
+  font-weight: 200;
+}
+.strike {
+  text-decoration: line-through;
+}
+.no-margin {
+  &,
+  & > p,
+  & > pre,
+  & > ul,
+  & > ol,
+  & > blockquote {
+    margin: 0;
+  }
+}
+.no-padding {
+  padding: 0;
+}
+.full-width {
+  &,
+  & > p {
+    width: 100%;
+  }
+}
+.inline-block {
+  p,
+  ul,
+  ol,
+  blockquote {
+    display: inline-block;
+  }
+}
+.inline-block-left {
+  p,
+  ul,
+  ol,
+  blockquote {
+    text-align: left;
+  }
+}
+.space-left {
+  padding-left: 1em;
+}
+.space-right {
+  padding-right: 1em;
+}
+.margin-left {
+  margin-left: 1em;
+}
+.margin-right {
+  margin-right: 1em;
+}
+.margin-top {
+  margin-top: 0.5em;
+}
+.margin-bottom {
+  margin-bottom: 0.5em;
+}
+.overlay-dark {
+  box-shadow: inset 0 0 0 9999px transparentize(#000, 0.5);
+}
+.no-wrap {
+  pre,
+  code {
+    white-space: pre;
+  }
+}
+.ib {
+  display: inline-block !important;
+}
+.space {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+.no-hmargin {
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+  }
+}
 
-.do, .dont, .warning {
+.do,
+.dont,
+.warning {
   blockquote {
     color: $text-dark;
-    padding-top: .25em;
-    padding-bottom: .25em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
   }
 }
 .do blockquote {
   border-left-color: $green;
-  background: transparentize($green, .9);
+  background: transparentize($green, 0.9);
 }
 .dont blockquote {
   border-left-color: $red;
-  background: transparentize($red, .9);
+  background: transparentize($red, 0.9);
 }
 .warning blockquote {
   border-left-color: $yellow;
-  background: transparentize($yellow, .9);
+  background: transparentize($yellow, 0.9);
 }
 
 .v-center {
@@ -406,48 +651,65 @@ table {
 // Simple 12-columns grid system
 .row {
   width: 100%;
-  &.table { display: table; };
+  &.table {
+    display: table;
+  }
   &::after {
     content: '';
     display: table;
     clear: both;
   }
-  [class^="col-"] { float: left; }
-  &.table [class^="col-"] {
+  [class^='col-'] {
+    float: left;
+  }
+  &.table [class^='col-'] {
     float: none;
     display: table-cell;
     vertical-align: inherit;
   }
 }
 
-[class^="col-"], [class^="w-"] {
+[class^='col-'],
+[class^='w-'] {
   display: inline-block;
 }
 
 @for $i from 1 through 12 {
-  .col-#{$i} {width: math.div(100%, 12) * $i; }
+  .col-#{$i} {
+    width: math.div(100%, 12) * $i;
+  }
 }
 
 @for $i from 1 through 20 {
-  .w-#{$i * 5} {width: 5% * $i; }
+  .w-#{$i * 5} {
+    width: 5% * $i;
+  }
 }
 
 // Animations
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .animation-fade {
   animation-duration: 300ms;
   animation-fill-mode: both;
   animation-timing-function: ease-out;
-  .remark-visible & { animation-name: fadeIn; }
+  .remark-visible & {
+    animation-name: fadeIn;
+  }
 }
 
 .no-animation {
   animation-duration: 0;
-  .remark-visible & { animation-name: none; }
+  .remark-visible & {
+    animation-name: none;
+  }
 }
 
 // Presentation-specific
@@ -459,17 +721,29 @@ table {
 
 .head-spacer {
   display: block;
-  height: 5*$font-size;
+  height: 5 * $font-size;
 
-  &.min { height: 3.5*$font-size; }
-  &.none { height: 2.1*$font-size; }
+  &.min {
+    height: 3.5 * $font-size;
+  }
+  &.none {
+    height: 2.1 * $font-size;
+  }
 }
 
 .head {
-  &.ng { background-color: $angular; }
-  &.react { background-color: $react; }
-  &.vue { background-color: $vue; }
-  &.dark { background-color: $dark; }
+  &.ng {
+    background-color: $angular;
+  }
+  &.react {
+    background-color: $react;
+  }
+  &.vue {
+    background-color: $vue;
+  }
+  &.dark {
+    background-color: $dark;
+  }
 
   background-color: $primary;
   color: $text-light;
@@ -477,12 +751,14 @@ table {
   left: 0;
   right: 0;
   top: 0;
-  height: 4*$font-size;
+  height: 4 * $font-size;
   padding: $font-size;
   text-align: left;
   z-index: 1;
-  transform: translate3d(0,0,0);
-  p { margin: 0; }
+  transform: translate3d(0, 0, 0);
+  p {
+    margin: 0;
+  }
   h1 {
     float: left;
     color: $text-light;
@@ -491,17 +767,18 @@ table {
     margin-top: -6px;
   }
 
-  .logo img, .logo.fas {
+  .logo img,
+  .logo.fas {
     float: left;
-    height: 5*$font-size;
-    margin: -.8*$font-size .5*$font-size 0 -.8*$font-size;
+    height: 5 * $font-size;
+    margin: -0.8 * $font-size 0.5 * $font-size 0 -0.8 * $font-size;
     vertical-align: middle;
   }
 
   .fit img {
     float: left;
-    height: 3*$font-size;
-    margin: -.3*$font-size .5*$font-size 0 -.5*$font-size;
+    height: 3 * $font-size;
+    margin: -0.3 * $font-size 0.5 * $font-size 0 -0.5 * $font-size;
     vertical-align: middle;
   }
 
@@ -509,17 +786,17 @@ table {
     $font-size: 2em;
     font-size: $font-size;
     height: auto;
-    margin: .015em .05em 0 .015em;
+    margin: 0.015em 0.05em 0 0.015em;
     vertical-align: middle;
   }
 
   .full.logo img {
     margin: 0;
-    height: 2*$font-size;;
+    height: 2 * $font-size;
   }
 
   .full & {
-    background-color: rgba(0,0,0,.6);
+    background-color: rgba(0, 0, 0, 0.6);
   }
 }
 
@@ -527,7 +804,7 @@ table {
   $border-width: 2px;
   $border-color: $secondary;
   $margin: 1em;
-  $vertical-margin: .25em;
+  $vertical-margin: 0.25em;
   font-size: 2.1em;
 
   h4 {
@@ -541,7 +818,7 @@ table {
     margin: 0;
     padding: 0;
     text-align: right;
-        
+
     > li {
       color: $secondary;
       overflow: auto; // 1 line clearfix! xD
@@ -598,8 +875,8 @@ table {
   .boom {
     position: absolute;
     display: block;
-    left: .5em;
-    margin-top: -.75em;
+    left: 0.5em;
+    margin-top: -0.75em;
     width: 13%;
   }
 }
@@ -626,8 +903,9 @@ table {
 }
 
 .big-p {
-  p, li {
-    font-size: 1.8em;    
+  p,
+  li {
+    font-size: 1.8em;
   }
 }
 
@@ -646,17 +924,28 @@ table {
 
 .big-text {
   $factor: 1.5;
-  h1 { font-size: 55px * $factor; }
-  h2 { font-size: 40px * $factor !important; }
-  p, div, > ul, > ol {
+  h1 {
+    font-size: 55px * $factor;
+  }
+  h2 {
+    font-size: 40px * $factor !important;
+  }
+  p,
+  div,
+  > ul,
+  > ol {
     font-size: 1.5em;
 
-    > p, div, > ul, > ol {
+    > p,
+    div,
+    > ul,
+    > ol {
       font-size: 1em;
     }
   }
   &.medium-code {
-    code, pre {
+    code,
+    pre {
       font-size: 1.25rem;
     }
   }
@@ -664,13 +953,21 @@ table {
 
 .huge-text {
   $factor: 2;
-  h1 { font-size: 55px * $factor; }
-  h2 { font-size: 40px * $factor !important; }
-  p, div, > ul, > ol {
+  h1 {
+    font-size: 55px * $factor;
+  }
+  h2 {
+    font-size: 40px * $factor !important;
+  }
+  p,
+  div,
+  > ul,
+  > ol {
     font-size: 2em;
   }
   &.medium-code {
-    code, pre {
+    code,
+    pre {
       font-size: 1.75rem;
     }
   }
@@ -695,10 +992,12 @@ table {
   right: 1em;
   text-align: right;
   color: $tertiary;
-  font-size: .8em;
+  font-size: 0.8em;
 }
 
-.bit-larger { font-size: 1.25em; }
+.bit-larger {
+  font-size: 1.25em;
+}
 
 .emoji img {
   height: 48px;
@@ -720,10 +1019,15 @@ table {
     display: block;
     margin: -1em -2em;
   }
-  &, h1 { color: $text-light; }
+  &,
+  h1 {
+    color: $text-light;
+  }
 }
 
-.smaller-code .remark-code { font-size: .8em; }
+.smaller-code .remark-code {
+  font-size: 0.8em;
+}
 
 .big-badges {
   li img {
@@ -775,7 +1079,7 @@ table {
 }
 
 .no-bullet {
-  ul { 
+  ul {
     list-style-type: none;
     padding: 0;
   }
@@ -824,21 +1128,39 @@ hr {
   background-color: lighten(transparentize($secondary, 0.5), 20);
 }
 
-.dplus { background: transparentize(lighten($green, 15%), .6); }
-.dminus { background: transparentize(saturate($red, 50%), .6); }
-.dneutral { background: transparentize($grey, .7); }
-.dplus, .dminus, .dneutral { font-family: $font-fixed; padding: 0 .25em; }
+.dplus {
+  background: transparentize(lighten($green, 15%), 0.6);
+}
+.dminus {
+  background: transparentize(saturate($red, 50%), 0.6);
+}
+.dneutral {
+  background: transparentize($grey, 0.7);
+}
+.dplus,
+.dminus,
+.dneutral {
+  font-family: $font-fixed;
+  padding: 0 0.25em;
+}
 
 .title {
-  background: linear-gradient(180deg,  transparentize(#000, .5) 80%,  transparentize(#000, 1));
+  background: linear-gradient(180deg, transparentize(#000, 0.5) 80%, transparentize(#000, 1));
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  padding: .5em 1.5em 1.5em 1.5em;
-  h1 { font-weight: 400; }
-  h1, h2 { margin: 0; }
-  h2 { margin-left: 8px; }
+  padding: 0.5em 1.5em 1.5em 1.5em;
+  h1 {
+    font-weight: 400;
+  }
+  h1,
+  h2 {
+    margin: 0;
+  }
+  h2 {
+    margin-left: 8px;
+  }
 }
 
 .transparent {
@@ -850,23 +1172,31 @@ hr {
 }
 
 @for $i from 1 through 10 {
-  .col-w#{$i * 10} { width: 10% * $i; }
+  .col-w#{$i * 10} {
+    width: 10% * $i;
+  }
 }
 
 .compare {
-  [class^="col-"] + [class^="col-"] {
+  [class^='col-'] + [class^='col-'] {
     border-left: 1px solid $grey;
   }
 }
 
 .bar {
   $height: 3px;
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
   font-size: 90%;
   border-bottom: $height solid $primary;
-  p { margin: 0 0 1em; }
-  &.dashed { border-bottom-style: dashed; }
-  &.no { border-bottom-color: $red; }
+  p {
+    margin: 0 0 1em;
+  }
+  &.dashed {
+    border-bottom-style: dashed;
+  }
+  &.no {
+    border-bottom-color: $red;
+  }
   &.gradient {
     border-bottom: none;
     &::after {
@@ -891,7 +1221,7 @@ hr {
 .ms {
   display: inline-block;
   width: 23%;
-  margin-top: -.35em;
+  margin-top: -0.35em;
 
   &.w-50 {
     width: 50%;
@@ -899,13 +1229,18 @@ hr {
 }
 
 .twitter-handle {
-  &, & p { font-size: $font-size * .8 !important; }
+  &,
+  & p {
+    font-size: $font-size * 0.8 !important;
+  }
   position: absolute;
   bottom: 0;
   right: 1em;
   opacity: 0.6;
   z-index: 10;
-  .hide-handle & { display: none; }
+  .hide-handle & {
+    display: none;
+  }
 }
 
 .who {
@@ -914,7 +1249,7 @@ hr {
   right: 0;
   bottom: 0;
   &.darkened {
-    background: linear-gradient(0, transparentize(#000, .2),  transparentize(#000, 1));
+    background: linear-gradient(0, transparentize(#000, 0.2), transparentize(#000, 1));
   }
   p {
     float: right;
@@ -939,12 +1274,14 @@ hr {
 
 .devtime {
   $height: 2em;
-  border-radius: .5em;
+  border-radius: 0.5em;
   height: $height;
   background: #ccc;
   overflow: hidden;
 
-  p { margin: 0; }
+  p {
+    margin: 0;
+  }
 
   .tbar {
     $height: 2em;
@@ -954,8 +1291,10 @@ hr {
     line-height: $height;
     background: $primary;
     color: $light;
-  
-    &.alt { background: $secondary; }
+
+    &.alt {
+      background: $secondary;
+    }
   }
 
   .remark-visible & .progress {
@@ -968,10 +1307,10 @@ hr {
   $height: 1.2em;
   height: $height;
   line-height: $height;
-  border-radius: .5em;
+  border-radius: 0.5em;
   background: $primary;
   color: $light;
-  padding: 0 .25em;
+  padding: 0 0.25em;
 
   .s {
     font-size: 70%;
@@ -979,7 +1318,9 @@ hr {
     top: -9%;
   }
 
-  &.alt { background: $secondary; }
+  &.alt {
+    background: $secondary;
+  }
 }
 
 @keyframes progress {
@@ -992,15 +1333,18 @@ hr {
   }
   to {
     width: 100%;
-    color:  $light;
+    color: $light;
   }
 }
 
 @keyframes zoomOutCircle {
-  from { transform: scale(1); }
-  to { transform: scale(.47); }
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.47);
+  }
 }
-
 
 .fade-in-delayed {
   animation-duration: 1s;
@@ -1017,15 +1361,20 @@ hr {
 }
 
 @keyframes rotating {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .rotating {
   animation: rotating 60s linear infinite;
 }
 
-.clist ul, .clist ol {
+.clist ul,
+.clist ol {
   display: inline-block;
   text-align: left;
 }
@@ -1039,7 +1388,7 @@ hr {
 
 .cli {
   & code {
-    padding: .75em;
+    padding: 0.75em;
     border-radius: 10px;
     background: $dark-grey;
     color: $light;
@@ -1063,9 +1412,16 @@ hr {
   // text-shadow: 0 0 1em rgba(0,0,0,.6), 0 0 1em rgba(0,0,0,.6), 0 0 1em rgba(0,0,0,.6);
   text-transform: uppercase;
   backdrop-filter: blur(3px);
-  h1 { font-weight: 400; }
-  h1, h2 { margin: 0; }
-  h2 { margin-left: 8px; }
+  h1 {
+    font-weight: 400;
+  }
+  h1,
+  h2 {
+    margin: 0;
+  }
+  h2 {
+    margin-left: 8px;
+  }
 }
 
 .hidden {
@@ -1073,17 +1429,17 @@ hr {
 }
 
 .gradient-text {
-	background-image: linear-gradient(92deg, $medium-blue, $blue);
+  background-image: linear-gradient(92deg, $medium-blue, $blue);
   background-clip: text;
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	animation: hue 15s infinite linear;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: hue 15s infinite linear;
 }
 
 .credits {
   position: absolute;
   top: auto;
-  bottom: .5em;
+  bottom: 0.5em;
   right: 2em;
   left: 2em;
   font-size: 0.7em;
@@ -1095,16 +1451,20 @@ hr {
 }
 
 @keyframes hue {
-  from { filter: hue-rotate(0deg); }
-  to { filter: hue-rotate(-360deg); }
+  from {
+    filter: hue-rotate(0deg);
+  }
+  to {
+    filter: hue-rotate(-360deg);
+  }
 }
 
 .img-shadow img {
-  filter: drop-shadow(0 0 0.5em rgba(0,0,0,.6))drop-shadow(0 0 0.5em rgba(0,0,0,.6));
+  filter: drop-shadow(0 0 0.5em rgba(0, 0, 0, 0.6)) drop-shadow(0 0 0.5em rgba(0, 0, 0, 0.6));
 }
 
 .logo-filter {
-  filter: hue-rotate(20deg)brightness(150%);
+  filter: hue-rotate(20deg) brightness(150%);
 }
 
 .up {
@@ -1112,7 +1472,7 @@ hr {
 }
 
 .text-shadow {
-  text-shadow: 0 0 .5em rgba(0,0,0,.6);
+  text-shadow: 0 0 0.5em rgba(0, 0, 0, 0.6);
 }
 
 .noclick {
@@ -1137,7 +1497,7 @@ hr {
     left: 0 !important;
   }
   .remark-slide {
-    transform: transform3d(0,0,0) !important;
+    transform: transform3d(0, 0, 0) !important;
   }
   .animated {
     -webkit-animation: unset !important;
@@ -1147,7 +1507,8 @@ hr {
     -webkit-animation-duration: 0 !important;
     animation-duration: 0 !important;
   }
-  .full, .text-shadow {
+  .full,
+  .text-shadow {
     text-shadow: none !important;
   }
   .zoom-out-circle {

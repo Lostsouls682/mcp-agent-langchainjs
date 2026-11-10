@@ -18,15 +18,15 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: List of recommended beers
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Beer"
-        "400":
+                  $ref: '#/components/schemas/Beer'
+        '400':
           description: Missing required query parameter
 
   /api/beers/{id}:
@@ -42,13 +42,13 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: Beer details
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Beer"
-        "404":
+                $ref: '#/components/schemas/Beer'
+        '404':
           description: Beer not found
 
 components:

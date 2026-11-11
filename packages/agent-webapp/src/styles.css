@@ -1,6 +1,7 @@
 :root {
-  --azc-primary: #de471d;
-  --azc-bg: #eee;
+  --playground-logo: #7b6cff;
+  --azc-primary: #5943c6;
+  --azc-bg: #f5f3fb;
   --azc-border-radius: 16px;
 }
 
@@ -18,7 +19,7 @@ body {
 nav {
   display: flex;
   flex: 0 1 auto;
-  background: #333;
+  background: #201a36;
   color: #fff;
   padding: 16px;
   font-family:
@@ -31,18 +32,53 @@ nav {
   font-size: 1.25rem;
   align-items: center;
   justify-content: space-between;
+}
 
-  & img {
-    height: 38px;
-    margin-right: 0.5em;
-    margin-top: -6px;
-    margin-bottom: -6px;
-  }
+.brand {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 55%;
+  text-decoration: none;
+}
+
+.brand:focus-visible {
+  outline: 2px solid #bdb4ff;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.brand-wordmark {
+  display: block;
+  width: 250px;
+  max-width: 100%;
+  height: auto;
+}
+
+.brand-icon {
+  display: none;
+  width: 40px;
+  height: 40px;
 }
 
 @media (width < 800px) {
   nav azc-auth {
     font-size: 0 !important;
+  }
+}
+
+@media (width < 480px) {
+  nav {
+    padding: 12px;
+  }
+
+  .brand-wordmark {
+    display: none;
+  }
+
+  .brand-icon {
+    display: block;
   }
 }
 

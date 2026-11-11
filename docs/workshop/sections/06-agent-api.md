@@ -7,7 +7,6 @@ With our MCP server up and running, it's time to build our AI agent using LangCh
 There are many frameworks available to build AI agents, but for this workshop we'll use [LangChain.js](https://docs.langchain.com/oss/javascript/langchain/overview). It's one of the most popular JS frameworks for building applications with LLMs, with a huge community of developers. Since its v1.0 release, it's now an agent-first framework making it a perfect fit for our use case.
 
 The benefits of using LangChain.js are numerous:
-
 - It provides a simple and consistent API to interact with different LLM providers, allowing to switch and try different models with minimal code changes.
 - It has first-class support for building agents, while streaming all intermediate steps for creating dynamic UI experiences.
 - It supports a wide range of tools and integrations, including MCP, vector databases, APIs, and more.
@@ -26,7 +25,9 @@ import { HttpRequest, InvocationContext, HttpResponseInit, app } from '@azure/fu
 import { type AIChatCompletionRequest, type AIChatCompletionDelta } from '../models.js';
 
 export async function postChats(request: HttpRequest, context: InvocationContext): Promise<HttpResponseInit> {
+
   // TODO: implement chat endpoint
+
 }
 
 app.setup({ enableHttpStream: true });
@@ -45,7 +46,6 @@ Here we're using the Azure Functions SDK to create an HTTP-triggered function. t
 3. As we're going to stream the Agent responses, we need to toggle a special option to enable HTTP streaming with `{ enableHttpStream: true }`.
 
 You might have noticed in the imports that we already have defined some models that we'll use for our request and response:
-
 - `AIChatCompletionRequest`: defines the shape of the request body that our endpoint will receive.
 - `AIChatCompletionDelta`: defines the shape of the response chunks that our endpoint will stream back to the client.
 
@@ -97,6 +97,7 @@ export async function postChats(request: HttpRequest, context: InvocationContext
     }
 
     // TODO: Implement the AI agent here
+
   } catch (_error: unknown) {
     const error = _error as Error;
     context.error(`Error when processing chat-post request: ${error.message}`);
@@ -121,15 +122,15 @@ Now we can start coding our AI agent! Let's start by initializing our LLM model 
 import { ChatOpenAI } from '@langchain/openai';
 ```
 
-Then, inside the `postChats` function, add this code after the `// TODO: Implement the AI agent here` comment:
+Then, inside the `postChats` function, add this code after the `// TODO: Implement the AI agent here` comment: 
 
 ```ts
-const model = new ChatOpenAI({
-  configuration: { baseURL: azureOpenAiEndpoint },
-  modelName: process.env.AZURE_OPENAI_MODEL ?? 'gpt-5-mini',
-  streaming: true,
-  apiKey: getAzureOpenAiTokenProvider(),
-});
+    const model = new ChatOpenAI({
+      configuration: { baseURL: azureOpenAiEndpoint },
+      modelName: process.env.AZURE_OPENAI_MODEL ?? 'gpt-5-mini',
+      streaming: true,
+      apiKey: getAzureOpenAiTokenProvider(),
+    });
 ```
 
 <!-- TODO: test ollama responses api -->
@@ -175,22 +176,22 @@ This will use the current user identity to authenticate with Azure OpenAI. We do
 The next step is to connect to our Burger MCP server and load the tools we need for our agent. Add this import at the top of the file:
 
 ```ts
-import { MultiServerMCPClient } from '@langchain/mcp-adapters';
+import { MultiServerMCPClient } from "@langchain/mcp-adapters";
 ```
 
 Next, continue the code inside the `postChats` function after the model initialization:
 
 ```ts
-context.log(`Connecting to Burger MCP server at ${burgerMcpUrl}`);
-const client = new MultiServerMCPClient({
-  burger: {
-    transport: 'http',
-    url: burgerMcpUrl,
-  },
-});
+    context.log(`Connecting to Burger MCP server at ${burgerMcpUrl}`);
+    const client = new MultiServerMCPClient({
+      burger: {
+        transport: 'http',
+        url: burgerMcpUrl,
+      },
+    });
 
-const tools = await client.getTools();
-context.log(`Loaded ${tools.length} tools from Burger MCP server`);
+    const tools = await client.getTools();
+    context.log(`Loaded ${tools.length} tools from Burger MCP server`);
 ```
 
 Here we're first creating an MCP client and connecting it to our Burger MCP server using HTTP. Note that the `MultiServerMCPClient` supports connecting to multiple MCP servers and mixing different transports if needeed. By default, it works with **stateless connections** and needs some additional configuration to support **stateful servers** (see the [LangChain.js MCP documentation](https://docs.langchain.com/oss/javascript/langchain/mcp) for more details).
@@ -228,7 +229,6 @@ The restaurant is called Contoso Burgers. Contoso Burgets always provides french
 ```
 
 As you can see, this prompt is quite detailed. We'll break it down to understand the different parts:
-
 - **Role**: we define the role of the agent, what it is supposed to do/not do and the tone it should use. Role-playing is a powerful technique to guide an LLM behavior, and has been shown to improve results significantly.
 
 - **Context**: we provide additional context about the restaurant and its policies. This **grounds the agent** in the specific domain of our company, and provide the necessary background information and data (like the fact that fries and drinks are included with every order) that the burger API does not provide directly.
@@ -236,10 +236,10 @@ As you can see, this prompt is quite detailed. We'll break it down to understand
 - **Task**: we define the main task of the agent, which is to help the user with their requests. This can be a multiple-step task, here we just keep it simple.
 
 - **Instructions**: we provide a set of instructions to guide the agent behavior, can clarify, fine-tune, and constrain its actions. Some important instructions here are:
-  - `Always use the provided tools to get information or perform actions`: this ensures that the agent relies on the tools we provided via MCP, and does not try to answer questions on its own. We also give it an example usage with the `get_burger` tool, and explicitly tell it to retry if it gets errors.
-  - `If you cannot get the information needed...`: this is **a very important instruction to avoid hallucinations**, called an _escape hatch_. It tells the agent to inform the user if it cannot fulfill their request, instead of making up information.
-  - `Creating or cancelling an order requires the userId...`: this instruction is specific to our use case, as we will provide the `userId` via the request context. This prevents the agent from asking for it, which might be confusing for the user.
-  - We also provide detailed instructions on how to format the answers using markdown, including images. This kind of formatting can be tuned to fit your frontend needs.
+  * `Always use the provided tools to get information or perform actions`: this ensures that the agent relies on the tools we provided via MCP, and does not try to answer questions on its own. We also give it an example usage with the `get_burger` tool, and explicitly tell it to retry if it gets errors.
+  * `If you cannot get the information needed...`: this is **a very important instruction to avoid hallucinations**, called an *escape hatch*. It tells the agent to inform the user if it cannot fulfill their request, instead of making up information.
+  * `Creating or cancelling an order requires the userId...`: this instruction is specific to our use case, as we will provide the `userId` via the request context. This prevents the agent from asking for it, which might be confusing for the user.
+  * We also provide detailed instructions on how to format the answers using markdown, including images. This kind of formatting can be tuned to fit your frontend needs.
 
 <div class="tip" data-title="Tip">
 
@@ -247,7 +247,7 @@ As you can see, this prompt is quite detailed. We'll break it down to understand
 
 </div>
 
-When working with agents, the prompt crafting process is called _context engineering_, and it's a key skill to master when building AI applications. It's also a bit different than what we call _prompt engineering_: prompt engineering is more focused on **how** to write the prompt (formatting, structure, wording etc.), while context engineering is more about **what** to include in the prompt to provide the necessary context for the agent to perform its task effectively, without overloading it with unnecessary information.
+When working with agents, the prompt crafting process is called *context engineering*, and it's a key skill to master when building AI applications. It's also a bit different than what we call *prompt engineering*: prompt engineering is more focused on **how** to write the prompt (formatting, structure, wording etc.), while context engineering is more about **what** to include in the prompt to provide the necessary context for the agent to perform its task effectively, without overloading it with unnecessary information.
 
 #### Creating the agent
 
@@ -262,21 +262,20 @@ import { createAgent, AIMessage, HumanMessage } from 'langchain';
 Then again, continue the code inside the `postChats` function after loading the tools:
 
 ```ts
-const agent = createAgent({
-  model,
-  tools,
-  systemPrompt: agentSystemPrompt,
-});
+    const agent = createAgent({
+      model,
+      tools,
+      systemPrompt: agentSystemPrompt,
+    });
 ```
 
 Seems pretty straightforward, right? We just call the `createAgent` function, passing the model, the tools and the system prompt we created earlier.
 
-While simple on the surface, this creates a _ReAct_ (Reasoning + Acting) agent that decide which tools to use, and iteratively work towards solutions.
+While simple on the surface, this creates a *ReAct* (Reasoning + Acting) agent that decide which tools to use, and iteratively work towards solutions.
 
 You have have the option to customize the agent behavior with **middlewares**, that can dynamically modify, extend or hook into the agent execution flow.
 
 Middlewares can for example be used to:
-
 - Add human-in-the-loop capabilities, to allow a human to review and approve tool calls before they are executed
 - Add pre/post model and tool processing for context injection or validation, for security or compliance purposes
 - Add dynamic control flows, to automatically retry failed tool calls, or branch the execution based on certain conditions
@@ -288,19 +287,23 @@ Our use case is simple enough that we don't need any middlewares, but you can re
 Before we can call the agent to generate the response, we need to convert the messages we received in the request to the format expected by LangChain.js. Add this code after the agent creation:
 
 ```ts
-const lcMessages = messages.map((m) => (m.role === 'user' ? new HumanMessage(m.content) : new AIMessage(m.content)));
+    const lcMessages = messages.map((m) =>
+      m.role === 'user' ? new HumanMessage(m.content) : new AIMessage(m.content),
+    );
 ```
 
 Now we can call the agent to generate the response. Add this code below:
 
 ```ts
-// Start the agent and stream the response events
-const responseStream = agent.streamEvents(
-  {
-    messages: [new HumanMessage(`userId: ${userId}`), ...lcMessages],
-  },
-  { version: 'v2' },
-);
+    // Start the agent and stream the response events
+    const responseStream = agent.streamEvents(
+      {
+        messages: [
+          new HumanMessage(`userId: ${userId}`),
+          ...lcMessages],
+      },
+      { version: 'v2' },
+    );
 ```
 
 <div class="info" data-title="note">
@@ -319,18 +322,18 @@ import { StreamEvent } from '@langchain/core/tracers/log_stream';
 And complete the `postChats` function after the response stream creation:
 
 ```ts
-// Convert the LangChain stream into a Readable stream of JSON chunks
-const jsonStream = Readable.from(createJsonStream(responseStream));
+    // Convert the LangChain stream into a Readable stream of JSON chunks
+    const jsonStream = Readable.from(createJsonStream(responseStream));
 
-return {
-  headers: {
-    // This content type is needed for streaming responses
-    // from an Azure Static Web Apps linked backend API
-    'Content-Type': 'text/event-stream',
-    'Transfer-Encoding': 'chunked',
-  },
-  body: jsonStream,
-};
+    return {
+      headers: {
+        // This content type is needed for streaming responses
+        // from an Azure Static Web Apps linked backend API
+        'Content-Type': 'text/event-stream',
+        'Transfer-Encoding': 'chunked',
+      },
+      body: jsonStream,
+    };
 ```
 
 The `Readable.from()` methods allows us to create a Node.js stream from an [async generator function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/AsyncGenerator). We also need to further process the response stream to convert it to a JSON format compatible with our frontend, so we call a helper function named `createJsonStream` that we'll implement next.
@@ -438,7 +441,7 @@ You can play a bit and edit the question to see how the agent behaves.
 #### Option 2: Using cURL
 
 Open up a new terminal in VS Code, and run the following commands:
-
+  
 ```bash
 curl -N -sS -X POST "http://localhost:7072/api/chats/stream" \
   -H "Content-Type: application/json" \

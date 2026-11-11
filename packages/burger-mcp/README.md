@@ -85,14 +85,14 @@ npm run start -- --local
 
 ### Available Scripts
 
-| Script                | Description                                              |
-| --------------------- | -------------------------------------------------------- |
-| `npm start`           | Start the MCP server with HTTP and SSE endpoints         |
-| `npm run start:local` | Start the MCP server with STDIO transport                |
-| `npm run dev`         | Start the MCP server with hot reload                     |
-| `npm run dev:local`   | Start the MCP server with hot reload and STDIO transport |
-| `npm run build`       | Build the TypeScript source                              |
-| `npm run clean`       | Clean build artifacts                                    |
+| Script                          | Description                                                            |
+| ------------------------------- | ---------------------------------------------------------------------- |
+| `npm start`                     | Start the MCP server with HTTP and SSE endpoints                       |
+| `npm run start:local`           | Start the MCP server with STDIO transport                              |
+| `npm run dev`                   | Start the MCP server with hot reload                                   |
+| `npm run dev:local`             | Start the MCP server with hot reload and STDIO transport               |
+| `npm run build`                 | Build the TypeScript source                                            |
+| `npm run clean`                 | Clean build artifacts                                                  |
 
 ### Configuration
 

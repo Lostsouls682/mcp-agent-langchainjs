@@ -59,9 +59,7 @@ while (allBeers.length < targetTotal) {
   const currentBatchSize = Math.min(batchSize, remaining);
   const startId = allBeers.length + 1;
   const endId = startId + currentBatchSize - 1;
-  console.log(
-    `Generating batch ${batchNumber} (${allBeers.length}/${targetTotal}, beer-${String(startId).padStart(4, '0')} to beer-${String(endId).padStart(4, '0')})...`,
-  );
+  console.log(`Generating batch ${batchNumber} (${allBeers.length}/${targetTotal}, beer-${String(startId).padStart(4, '0')} to beer-${String(endId).padStart(4, '0')})...`);
 
   const existingNames = allBeers.map((b) => b.name);
 
@@ -84,12 +82,8 @@ Create ${currentBatchSize} beers for Contoso World Beers (IDs beer-${String(star
 - Detailed flavor notes (3-5 per beer) covering taste, aroma, and mouthfeel
 - Food pairing notes (2-4 per beer) with specific dishes or ingredients
 
-${
-  existingNames.length > 0
-    ? `## Already generated beer names
-The EXISTING_NAMES variable contains the names of beers already generated. Do NOT duplicate any of these names. Ensure variety and creativity.`
-    : ''
-}
+${existingNames.length > 0 ? `## Already generated beer names
+The EXISTING_NAMES variable contains the names of beers already generated. Do NOT duplicate any of these names. Ensure variety and creativity.` : ''}
 
 ## Guidelines
 - Beer names should be creative and memorable

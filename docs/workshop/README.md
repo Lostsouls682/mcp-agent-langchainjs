@@ -5,7 +5,6 @@ Forget Skynet: your AI agents won't trigger an apocalypse; they'll just help you
 With the Model Context Protocol (MCP), your agent can interact with all the necessary tools to accomplish its mission, from a Node.js API to a website for testing its culinary skills. The result: an autonomous, intelligent, reliable AI assistant that is thankfully harmless to the planet. 🍔
 
 **What you'll learn**:
-
 - Introduction to AI Agents and the Model Context Protocol (MCP)
 - Using [LangChain.js](https://js.langchain.com/) to connect the model to MCP tools and create an AI agent
 - Introduction to context engineering to enhance performance

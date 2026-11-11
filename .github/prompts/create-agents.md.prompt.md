@@ -24,62 +24,64 @@ When creating the `AGENTS.md` file, prioritize clarity, completeness, and action
 ## Instructions
 
 1. Examine the current project to understand its context, requirements, constraints, architecture, tech stack and specificities, and any existing files that may provide insights.
-   - For example, look for files that may contain the project name, idea, vision, requirements, technology stack and constraints. This may include README files, project documentation, configuration files (e.g., package.json, pyproject.toml, etc.), CI/CD workflows and any other relevant files.
-   - If the project is a monorepo or has multiple distinct project roots, identify the relevant subdirectories that may require their own `AGENTS.md` files.
+
+    - For example, look for files that may contain the project name, idea, vision, requirements, technology stack and constraints. This may include README files, project documentation, configuration files (e.g., package.json, pyproject.toml, etc.), CI/CD workflows and any other relevant files.
+    - If the project is a monorepo or has multiple distinct project roots, identify the relevant subdirectories that may require their own `AGENTS.md` files.
 
 2. Once you have all the necessary information, create or update the `AGENTS.md` file with all relevant project context, requirements, stack and constraints for the code agents that will implement the project.
-   - When doing so, use this the template for structuring the document:
 
-   ```md
-   # [project_name]
+    - When doing so, use this the template for structuring the document:
 
-   [Project summary]
+    ```md
+    # [project_name]
 
-   ## Overview
+    [Project summary]
 
-   - [Brief description of what the project does, its purpose and audience]
-   - [Architecture overview if complex]
-   - [Project structure if relevant]
+    ## Overview
 
-   ## Key Technologies and Frameworks
+    - [Brief description of what the project does, its purpose and audience]
+    - [Architecture overview if complex]
+    - [Project structure if relevant]
 
-   - [List of main technologies, frameworks, and libraries used in the project]
+    ## Key Technologies and Frameworks
 
-   ## Constraints and Requirements [if any]
+    - [List of main technologies, frameworks, and libraries used in the project]
 
-   - [Any specific constraints, requirements, or considerations for the project]
+    ## Constraints and Requirements [if any]
 
-   ## Challenges and Mitigation Strategies [if any]
+    - [Any specific constraints, requirements, or considerations for the project]
 
-   - [Potential challenges and how they will be addressed]
+    ## Challenges and Mitigation Strategies [if any]
 
-   ## Development Workflow [if applicable]
+    - [Potential challenges and how they will be addressed]
 
-   - [Most important scripts, commands, and tools for development, testing, and deployment. How to start dev server, run tests, build for production, etc.]
+    ## Development Workflow [if applicable]
 
-   ## Coding Guidelines [if any]
+    - [Most important scripts, commands, and tools for development, testing, and deployment. How to start dev server, run tests, build for production, etc.]
 
-   - [Any specific coding standards, style guides, or best practices to follow]
+    ## Coding Guidelines [if any]
 
-   ## Security Considerations [if any]
+    - [Any specific coding standards, style guides, or best practices to follow]
 
-   - [Any security practices or considerations relevant to the project]
+    ## Security Considerations [if any]
 
-   ## Pull Request Guidelines [if any]
+    - [Any security practices or considerations relevant to the project]
 
-   - [Any specific guidelines for creating pull requests, such as, title format, required checks, review process, commit message conventions, etc.]
+    ## Pull Request Guidelines [if any]
 
-   ## Debugging and Troubleshooting [if applicable]
+    - [Any specific guidelines for creating pull requests, such as, title format, required checks, review process, commit message conventions, etc.]
 
-   - [Common issues and solutions, logging patterns, debug configuration, performance considerations]
-   ```
+    ## Debugging and Troubleshooting [if applicable]
 
-   - If a section is not relevant, you can omit it.
-   - **Be specific and concise**: include exact commands, and information from the provided context, do not make any assumptions or add unnecessary details.
-   - Only use information you found to fill the sections.
-   - Use standard Markdown formatting.
-   - If needed, you can add specific sections relevant to the project that are not covered by the template if they provide important context for the code agents.
-   - If the file already contains enough relevant information, you can skip this step.
+    - [Common issues and solutions, logging patterns, debug configuration, performance considerations]
+    ```
+
+    - If a section is not relevant, you can omit it.
+    - **Be specific and concise**: include exact commands, and information from the provided context, do not make any assumptions or add unnecessary details.
+    - Only use information you found to fill the sections.
+    - Use standard Markdown formatting.
+    - If needed, you can add specific sections relevant to the project that are not covered by the template if they provide important context for the code agents.
+    - If the file already contains enough relevant information, you can skip this step.
 
 ## Best Practices
 

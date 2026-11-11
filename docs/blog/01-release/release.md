@@ -14,7 +14,6 @@ date: '2025-10-21T16:09:46Z'
 AI agents that can actually do stuff (not just chat) are the fun part nowadays, but wiring them cleanly into real APIs, keeping things observable, and shipping them to the cloud can get... messy. So we built a fresh end‑to‑end sample to show how to do it right with the brand new **LangChain.js v1** and **Model Context Protocol (MCP)**. In case you missed it, MCP is a recent open standard that makes it easy for LLM agents to consume tools and APIs, and LangChain.js, a great framework for building GenAI apps and agents, has first-class support for it.
 
 This new sample gives you:
-
 - A LangChain.js v1 agent that streams its result, along reasoning + tool steps
 - An MCP server exposing real tools (burger menu + ordering) from a business API
 - A web interface with authentication, sessions history, and a debug panel (for developers)
@@ -51,7 +50,6 @@ Yes, it’s a burger ordering system. Who doesn't like burgers? Grab your favori
 ## Use case
 
 You want an AI assistant that can take a natural language request like “Order two spicy burgers and show me my pending orders” and:
-
 - Understand intent (query menu, then place order)
 - Call the right MCP tools in sequence, calling in turn the necessary APIs
 - Stream progress (LLM tokens + tool steps)
@@ -63,12 +61,12 @@ Swap “burgers” for “inventory”, “bookings”, “support tickets”, o
 
 Before we play a bit with the sample, let's have a look at the main services implemented here:
 
-| Service                          | Role                                                   | Tech                                      |
-| -------------------------------- | ------------------------------------------------------ | ----------------------------------------- |
-| Agent Web App (`agent-webapp`)   | Chat UI + streaming + session history                  | Azure Static Web Apps, Lit web components |
-| Agent API (`agent-api`)          | LangChain.js v1 agent orchestration + auth + history   | Azure Functions, Node.js                  |
-| Burger MCP Server (`burger-mcp`) | Exposes burger API as tools over MCP (Streamable HTTP) | Azure Functions, Express, MCP SDK         |
-| Burger API (`burger-api`)        | Business logic: burgers, toppings, orders lifecycle    | Azure Functions, Cosmos DB                |
+| Service | Role | Tech |
+| ------- | ---- | ---- |
+| Agent Web App (`agent-webapp`) | Chat UI + streaming + session history | Azure Static Web Apps, Lit web components |
+| Agent API (`agent-api`) | LangChain.js v1 agent orchestration + auth + history | Azure Functions, Node.js |
+| Burger MCP Server (`burger-mcp`) | Exposes burger API as tools over MCP (Streamable HTTP) | Azure Functions, Express, MCP SDK |
+| Burger API (`burger-api`) | Business logic: burgers, toppings, orders lifecycle | Azure Functions, Cosmos DB |
 
 Here's a simplified view of how they interact:
 
@@ -159,7 +157,6 @@ npx -y @modelcontextprotocol/inspector
 ```
 
 Then open the URL printed in the terminal in your browser and connect using these settings:
-
 - **Transport**: Streamable HTTP
 - **URL**: http://localhost:3000/mcp
 - **Connection Type**: Via Proxy (should be default)

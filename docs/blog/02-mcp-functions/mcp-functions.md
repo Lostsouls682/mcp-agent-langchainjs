@@ -98,7 +98,7 @@ Create a `host.json` file at the root of your Node.js project:
 
 > **Note:** Adjust the `arguments` array to point to your compiled server file (e.g., `lib/server.js` or `dist/server.js`), depending on your build setup. You can also change the port if needed to match your server configuration.
 
-The `hosts.json` file holds [metadata configuration](https://learn.microsoft.com/azure/azure-functions/functions-host-json) for the Functions runtime. The most important part here is the `customHandler` section. It configures the Azure Functions runtime to run your Node.js MCP server as a _custom handler_, which allows you to use any HTTP server framework (like Express, Fastify, etc.) without modification (**tip: it can do more than MCP servers!** 😉).
+The `hosts.json` file holds [metadata configuration](https://learn.microsoft.com/azure/azure-functions/functions-host-json) for the Functions runtime. The most important part here is the `customHandler` section. It configures the Azure Functions runtime to run your Node.js MCP server as a *custom handler*, which allows you to use any HTTP server framework (like Express, Fastify, etc.) without modification (**tip: it can do more than MCP servers!** 😉).
 
 There's no step 2 or 3. That's it! 😎
 
@@ -165,18 +165,20 @@ export function getMcpServer() {
     version: '1.0.0',
   });
 
-  server.registerTool('get_burgers', { description: 'Get a list of all burgers in the menu' }, async () => {
-    const response = await fetch(`${burgerApiUrl}/burgers`);
-    const burgers = await response.json();
-    return {
-      content: [
-        {
+  server.registerTool(
+    'get_burgers',
+    { description: 'Get a list of all burgers in the menu' },
+    async () => {
+      const response = await fetch(`${burgerApiUrl}/burgers`);
+      const burgers = await response.json();
+      return {
+        content: [{
           type: 'text',
-          text: JSON.stringify(burgers, null, 2),
-        },
-      ],
-    };
-  });
+          text: JSON.stringify(burgers, null, 2)
+        }]
+      };
+    }
+  );
 
   // ... more tools
   return server;
@@ -255,7 +257,6 @@ Configure GitHub Copilot to use your deployed MCP server by adding this to your 
 Click on "Start" button that will appear in the JSON file to activate the MCP server connection.
 
 Now you can use Copilot in agent mode and ask things like:
-
 - "What spicy burgers do you have?"
 - "Place an order for two cheeseburgers"
 - "Show my recent orders"
@@ -282,7 +283,6 @@ services:
     language: ts
     host: function
 ```
-
 While the infrastructure files can look intimidating at first, you don't need to understand all the details to get started. There are tons of templates and examples available to help you get going quickly, the important part is that everything is defined as code, so you can version control it and reuse it.
 
 Now let's deploy:
@@ -304,7 +304,6 @@ Once the deployment is finished, the CLI will show you the URL of the deployed r
 ## Example projects
 
 The burger MCP server is actually part of a larger example project that demonstrates building an AI agent with LangChain.js, that uses the burger MCP server to place orders. If you're interested in the next steps of building an AI agent on top of MCP, this is a great resource as it includes:
-
 - AI agent web API using LangChain.js
 - Web app interface built with Lit web components
 - MCP server on Functions (the one we just saw)

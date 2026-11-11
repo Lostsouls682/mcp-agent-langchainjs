@@ -110,19 +110,23 @@ This function takes care of building the full URL, setting the required headers 
 Next, inside the `getMcpServer` function, we can add our first tool to get the list of available burgers from the Burger API. Add the following code after the `// Add tools here` line:
 
 ```ts
-// Get the list of available burgers
-server.registerTool('get_burgers', { description: 'Get a list of all burgers in the menu' }, async () => {
-  const burgers = await fetchBurgerApi('/api/burgers');
-  return {
-    structuredContent: { result: burgers },
-    content: [
-      {
-        type: 'text' as const,
-        text: JSON.stringify(burgers),
-      },
-    ],
-  };
-});
+  // Get the list of available burgers
+  server.registerTool(
+    'get_burgers',
+    { description: 'Get a list of all burgers in the menu' },
+    async () => {
+      const burgers = await fetchBurgerApi('/api/burgers');
+      return {
+        structuredContent: { result: burgers },
+        content: [
+          {
+            type: 'text' as const,
+            text: JSON.stringify(burgers),
+          }
+        ]
+      };
+    },
+  );
 ```
 
 And here we have registered our first tool! The `registerTool` method takes 3 parameters:
@@ -131,7 +135,7 @@ And here we have registered our first tool! The `registerTool` method takes 3 pa
 
 2. **The tool config:** this object contains metadata about the tool, such as its description, input and output schemas, etc. **It's strongly recommended to always provided a description for each tool**, as it will help the LLM understand what the tool does and when to use it. You can optionally provide input and output schemas using Zod to define the expected parameters and return values of the tool, but for this simple tool we don't need any input parameters. As the output format is controlled by the API, we'll skip defining it here for simplicity but you can add it when you need to enforce stricter output typing.
 
-3. **The tool handler implementation**: this function contains the actual logic of the tool, and returns the result. The content may return _unstructured content_ such as text, audio or images, or _structured content_ such as JSON objects or arrays. Our API always return JSON objects, so we'll return the response in the `structuredContent` field of the MCP response. For backward compatibility, it's also recommended to result the JSON result as text in the `content` array field. Note that structured content value can **only be an object**! Our API here returns an array of burgers, so we wrap it in an object with a `result` property.
+3. **The tool handler implementation**: this function contains the actual logic of the tool, and returns the result. The content may return *unstructured content* such as text, audio or images, or *structured content* such as JSON objects or arrays. Our API always return JSON objects, so we'll return the response in the `structuredContent` field of the MCP response. For backward compatibility, it's also recommended to result the JSON result as text in the `content` array field. Note that structured content value can **only be an object**! Our API here returns an array of burgers, so we wrap it in an object with a `result` property.
 
 <div class="info" data-title="Note">
 
@@ -154,7 +158,7 @@ async function createToolResponse(handler: () => Promise<Record<string, any>>) {
         {
           type: 'text' as const,
           text: JSON.stringify(result),
-        },
+        }
       ],
     };
   } catch (error: any) {
@@ -178,17 +182,16 @@ This function takes a tool handler as a parameter, runs it, and format its resul
 Let's update our `get_burgers` tool to use this helper function. Replace the tool registration code with the following:
 
 ```ts
-// Get the list of available burgers
-server.registerTool(
-  'get_burgers',
-  {
-    description: 'Get a list of all burgers in the menu',
-  },
-  async () =>
-    createToolResponse(async () => {
-      return fetchBurgerApi('/api/burgers');
+  // Get the list of available burgers
+  server.registerTool(
+    'get_burgers',
+    {
+      description: 'Get a list of all burgers in the menu',
+    },
+    async () => createToolResponse(async () => {
+      return fetchBurgerApi('/api/burgers')
     }),
-);
+  );
 ```
 
 We basically wrapped the original handler code inside the `createToolResponse` function, which will take care of the response formatting and error handling for us, so we can focus on the actual tool logic.
@@ -198,20 +201,19 @@ We basically wrapped the original handler code inside the `createToolResponse` f
 Now that we have our first tool working, let's add another one that requires input parameters. We'll create a tool to get the details of a specific burger by its ID. Add the following code after the `get_burgers` tool registration:
 
 ```ts
-// Get a specific burger by its ID
-server.registerTool(
-  'get_burger_by_id',
-  {
-    description: 'Get a specific burger by its ID',
-    inputSchema: z.object({
-      id: z.string().describe('ID of the burger to retrieve'),
-    }),
-  },
-  async (args) =>
-    createToolResponse(async () => {
+  // Get a specific burger by its ID
+  server.registerTool(
+    'get_burger_by_id',
+    {
+      description: 'Get a specific burger by its ID',
+      inputSchema: z.object({
+        id: z.string().describe('ID of the burger to retrieve'),
+      }),
+    },
+    async (args) => createToolResponse(async () => {
       return fetchBurgerApi(`/api/burgers/${args.id}`);
     }),
-);
+  );
 ```
 
 This tool is similar to the previous one, but it includes an `inputSchema` property in the tool config object. This schema defines the expected input parameters for the tool, as the `id` of the burger to retrieve is needed. The schema is defined using Zod fluent API, which is translated to a JSON schema on the MCP level.
@@ -221,7 +223,6 @@ When implementing the tool handler, we can access the input parameters through t
 #### Adding more tools
 
 Now that we have the basic structure in place, you can continue adding the remaining tools for these remaining Burger API endpoints:
-
 - `get_toppings`
 - `get_topping_by_id`
 - `get_topping_categories`
@@ -238,12 +239,12 @@ Now that we have the basic structure in place, you can continue adding the remai
 
 To make the task easier, you can use AI code assistants like [GitHub Copilot](https://github.com/features/copilot): if you don't have access already, you can open https://github.com/features/copilot and click on the "Get started for free" button to enable GitHub Copilot for your account. Try referencing the OpenAPI specification while using **Agent mode** in the Copilot chat window to help you complete the implementation 😉
 
-<!--
+<!-- 
 HINT:
 Example prompt for Copilot, with `mcp.ts` open and in the context (auto model):
 
 ```
-#file:openapi.yaml
+#file:openapi.yaml 
 
 Add the following list of tools, based on the provided OpenAPI schema:
 
@@ -260,7 +261,6 @@ delete_order_by_id
 <div class="info" data-title="Skip notice">
 
 > Alternatively, you can skip the remaining MCP tool implementation by running this command in the terminal **at the root of the project** to get the completed code directly:
->
 > ```bash
 > curl -fsSL https://github.com/Azure-Samples/mcp-agent-langchainjs/releases/download/latest/burger-mcp-tools.tar.gz | tar -xvz
 > ```
@@ -343,7 +343,6 @@ app.all('/mcp', async (request: Request, response: Response) => {
 ```
 
 Let's break down what's happening here:
-
 1. We define a `/mcp` route that handle all HTTP methods (`GET`, `POST`, etc). For our implementation, only `POST` requests are supported, we'll handle the other methods rejection later.
 
 2. We create the `StreamableHTTPServerTransport` instance, and explicity set the `sessionIdGenerator` to `undefined`, as want our server to be **stateless** and not maintain sessions between requests.
@@ -400,12 +399,11 @@ The easiest way to test the MCP server is with the [MCP Inspector tool](https://
 <div class="important" data-title="Codespaces important note">
 
 > If you're running this workshop in GitHub Codespaces, you need some additional setup before using the MCP Inspector. Open a new terminal and run these commands first (**skip this step if you're running locally**):
->
-> ```bash
-> export ALLOWED_ORIGINS="https://$CODESPACE_NAME-6274.$GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN"
-> export MCP_PROXY_FULL_ADDRESS="https://$CODESPACE_NAME-6277.$GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN"
-> export DANGEROUSLY_OMIT_AUTH=true
-> ```
+>```bash
+>export ALLOWED_ORIGINS="https://$CODESPACE_NAME-6274.$GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN"
+>export MCP_PROXY_FULL_ADDRESS="https://$CODESPACE_NAME-6277.$GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN"
+>export DANGEROUSLY_OMIT_AUTH=true
+>```
 >
 > Then go to the **Ports** tab in the bottom panel, right click on the `6277` port, and switch its **Port Visibility** to **Public**.
 >
@@ -440,7 +438,6 @@ Try playing a bit with the other tools to check your implementation!
 <div class="tip" data-title="tip">
 
 > If you're having trouble connecting to your local MCP server from the MCP Inspector, make sure that:
->
 > - The MCP server is running
 > - The **Inspector Proxy Adress** under the **Configuration** tab of the MCP Inspector is empty if you're running locally, or set to the forwarded URL for port 6277 if you're running in Codespaces (you can run `echo "https://$CODESPACE_NAME-6277.$GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN"` to get the correct URL or view it in the **Ports** tab of the VS Code bottom panel).
 
@@ -470,10 +467,9 @@ Now you can open a Copilot chat window, set the agent mode and check that the `b
 ![GitHub Copilot chat screenshot showing the tools button](./assets/github-copilot-tools.png)
 
 Try asking things like:
-
-- _"What spicy burgers do you have?"_
-- _"Place an order for two cheeseburgers"_
-- _"Show my recent orders"_
+- *"What spicy burgers do you have?"*
+- *"Place an order for two cheeseburgers"*
+- *"Show my recent orders"*
 
 Copilot will automatically discover and use the MCP tools! 🎉
 

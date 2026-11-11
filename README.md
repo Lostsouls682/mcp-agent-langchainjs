@@ -63,7 +63,7 @@ Additionally, these optional and support components are included:
 
 | Component       | Folder                                           | Purpose                                                  |
 | --------------- | ------------------------------------------------ | -------------------------------------------------------- |
-| Beer MCP Server | [`packages/beer-mcp`](./packages/beer-mcp)       | AI-powered beer recommendations via hybrid RAG           |
+| Beer MCP Server | [`packages/beer-mcp`](./packages/beer-mcp)       | AI-powered beer recommendations via hybrid RAG            |
 | Agent CLI       | [`packages/agent-cli`](./packages/agent-cli)     | Command-line interface LangChain.js agent and MCP client |
 | Data generation | [`packages/burger-data`](./packages/burger-data) | Scripts to (re)generate burgers data & images            |
 
@@ -133,19 +133,15 @@ Once deployment is complete, you'll see the URLs of all deployed services in the
 
 > [!IMPORTANT]
 > If you're using an Azure for Students or Free Trial account that you just created, you need to run the following command before running `azd up` or else the deployment will fail:
->
 > ```sh
 > azd env set AZURE_OPENAI_MODEL_CAPACITY 1
 > ```
->
 > This ensures that the resources deployed will fit within the free tier limits. **This limitations reduce the capacity for AI models usage, so you'll also have to provide another OpenAI endpoint to use the application properly.** To do that, use the following commands to set the OpenAI endpoint, API key and model you want to use:
->
 > ```sh
 > azd env set AZURE_OPENAI_ALT_ENDPOINT <your_openai_endpoint>
 > azd env set AZURE_OPENAI_API_KEY <your_openai_api_key>
 > azd env set AZURE_OPENAI_MODEL <your_openai_model>
 > ```
->
 > You can for example use the free [GitHub Models](https://docs.github.com/github-models/use-github-models/prototyping-with-ai-models#experimenting-with-ai-models-using-the-api) for this, or any other OpenAI compatible endpoint.
 
 ### Cost estimation
@@ -323,7 +319,6 @@ MCP is a protocol that enables AI agents to interact with external tools and API
 ### How does this project differ from other AI agent samples?
 
 This sample focuses on **MCP integration** with LangChain.js in a **serverless architecture**. Unlike standalone agent examples, this project demonstrates:
-
 - Multi-service architecture (web UIs, APIs, MCP server)
 - Production-ready deployment on Azure
 - Real-world use case (burger ordering system)
@@ -332,7 +327,6 @@ This sample focuses on **MCP integration** with LangChain.js in a **serverless a
 ### Which LLM providers are supported?
 
 The agent supports any OpenAI-compatible endpoint:
-
 - **Azure OpenAI** (default when deployed to Azure)
 - **GitHub Models** (free alternative)
 - **Ollama** (local development)
@@ -341,14 +335,12 @@ The agent supports any OpenAI-compatible endpoint:
 ### What's the difference between local and cloud deployment?
 
 **Local development:**
-
 - Uses in-memory storage (data lost on restart)
 - No cloud costs
 - Requires local setup (Node.js, Docker)
 - Perfect for testing and development
 
 **Azure deployment:**
-
 - Uses Azure Cosmos DB for persistent storage
 - Production-ready with authentication
 - Single-command deployment with `azd up`
@@ -357,7 +349,6 @@ The agent supports any OpenAI-compatible endpoint:
 ### How does the MCP server work?
 
 The Burger MCP server exposes burger API operations as MCP tools:
-
 - It translates API calls into MCP tool definitions
 - AI agents can discover and call these tools automatically
 - Uses Streamable HTTP transport for communication
@@ -366,7 +357,6 @@ The Burger MCP server exposes burger API operations as MCP tools:
 ### Can I use this MCP server with other AI tools?
 
 Yes! The MCP server is compatible with:
-
 - **GitHub Copilot** (agent mode) - via `.vscode/mcp.json` config
 - **Claude Desktop** - via MCP client configuration
 - **MCP Inspector** - for testing and debugging
@@ -382,7 +372,6 @@ Yes! The MCP server is compatible with:
 ### How do I customize the MCP tools?
 
 You can extend the MCP server by:
-
 1. Adding new tool definitions in `packages/burger-mcp`
 2. Implementing corresponding API endpoints in `packages/burger-api`
 3. Updating the tool schema to expose new operations
@@ -391,11 +380,9 @@ You can extend the MCP server by:
 ### Why am I getting "model capacity" errors on Azure?
 
 If using Azure for Students or Free Trial, run:
-
 ```bash
 azd env set AZURE_OPENAI_MODEL_CAPACITY 1
 ```
-
 This ensures resources fit within free tier limits. You may also need to provide an alternative OpenAI endpoint.
 
 ### Where can I get help?
@@ -424,3 +411,4 @@ If you get stuck or have any questions about building AI apps, join:
 If you have product feedback or errors while building visit:
 
 [![Microsoft Foundry Developer Forum](https://img.shields.io/badge/GitHub-Microsoft_Foundry_Developer_Forum-blue?style=for-the-badge&logo=github&color=000000&logoColor=fff)](https://aka.ms/foundry/forum)
+

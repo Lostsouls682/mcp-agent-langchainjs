@@ -21,10 +21,7 @@ async function main() {
 
   const container = client.database('beerDB').container('beerVectors');
 
-  const terms = query
-    .replaceAll(',', '')
-    .split(/\s+/)
-    .filter((t) => t.length > 3);
+  const terms = query.replaceAll(',', '').split(/\s+/).filter((t) => t.length > 3);
   const parameters = terms.map((term, i) => ({ name: `@term${i}`, value: term }));
   const termNames = parameters.map((p) => p.name).join(', ');
   const sql = `

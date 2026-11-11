@@ -3,9 +3,9 @@ short_title: AI Agent with LangChain.js
 description: Discover how to create an AI agent using LangChain.js and MCP to interact with a burger restaurant API, build a web interface, and deploy it on Azure.
 type: workshop
 authors:
-  - Yohan Lasorsa
+- Yohan Lasorsa
 contacts:
-  - '@sinedied'
+- '@sinedied'
 banner_url: assets/banner.jpg
 duration_minutes: 120
 audience: students, devs
@@ -21,13 +21,13 @@ sections_title:
 
 In this workshop, we'll explore how to build an AI agent that can interact with a burger restaurant API using LangChain.js and the Model Context Protocol (MCP). Your agent will be able to answer questions about the menu, provide recommendations, and place orders, all through a web interface.
 
-We'll cover how to set up an MCP server and connect it to an existing REST API handling menu and orders data, allowing your LangChain.js agent to fetch real-time information and perform actions on behalf of users.
+We'll cover how to set up an MCP server and connect it to an existing REST API handling menu and orders data, allowing your LangChain.js agent to fetch real-time information and perform actions on behalf of users. 
 
 ## You'll learn how to...
 
 - Build an AI agent using [LangChain.js](https://docs.langchain.com/oss/javascript/langchain/overview).
 - Create an MCP (Model Context Protocol) server with [Express](https://expressjs.com) to allow the AI agent to connect with a REST API.
-- Use _context engineering_ to improve the performance of your AI agent.
+- Use *context engineering* to improve the performance of your AI agent.
 - Use [OpenAI](https://openai.com) models and [LangChain.js](https://js.langchain.com/docs/) to generate answers based on a prompt.
 - Create a serverless Web API with [Azure Functions](https://learn.microsoft.com/azure/azure-functions/).
 - Connect your agent API to a chat website.
@@ -37,25 +37,25 @@ We'll cover how to set up an MCP server and connect it to an existing REST API h
 
 <div data-hidden="$$proxy$$">
 
-|                      |                                                                                                                                                                                                                  |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| GitHub account       | [Get a free GitHub account](https://github.com/join)                                                                                                                                                             |
-| Azure account        | [Get a free Azure account](https://aka.ms/devrelft)                                                                                                                                                              |
-| A Web browser        | [Get Microsoft Edge](https://www.microsoft.com/edge)                                                                                                                                                             |
+| | |
+|----------------------|------------------------------------------------------|
+| GitHub account       | [Get a free GitHub account](https://github.com/join) |
+| Azure account        | [Get a free Azure account](https://aka.ms/devrelft) |
+| A Web browser        | [Get Microsoft Edge](https://www.microsoft.com/edge) |
 | JavaScript knowledge | [JavaScript tutorial on MDN documentation](https://developer.mozilla.org/docs/Web/JavaScript)<br>[JavaScript for Beginners on YouTube](https://www.youtube.com/playlist?list=PLlrxD0HtieHhW0NCG7M536uHGOtJ95Ut2) |
-| Basic LLM knowledge  | [Introduction to Large Language Models](https://www.youtube.com/watch?v=GQ_2OjNZ9aA&list=PLlrxD0HtieHi5ZpsHULPLxm839IrhmeDk&index=2)                                                                             |
+| Basic LLM knowledge | [Introduction to Large Language Models](https://www.youtube.com/watch?v=GQ_2OjNZ9aA&list=PLlrxD0HtieHi5ZpsHULPLxm839IrhmeDk&index=2) |
 
 </div>
 
 <div data-visible="$$proxy$$">
 
-|                          |                                                                                                                                                                                                                  |
-| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| GitHub account           | [Get a free GitHub account](https://github.com/join)                                                                                                                                                             |
-| Azure account (optional) | [Get a free Azure account](https://aka.ms/devrelft)                                                                                                                                                              |
-| A Web browser            | [Get Microsoft Edge](https://www.microsoft.com/edge)                                                                                                                                                             |
+| | |
+|--------------------------|------------------------------------------------------|
+| GitHub account           | [Get a free GitHub account](https://github.com/join) |
+| Azure account (optional) | [Get a free Azure account](https://aka.ms/devrelft) |
+| A Web browser            | [Get Microsoft Edge](https://www.microsoft.com/edge) |
 | JavaScript knowledge     | [JavaScript tutorial on MDN documentation](https://developer.mozilla.org/docs/Web/JavaScript)<br>[JavaScript for Beginners on YouTube](https://www.youtube.com/playlist?list=PLlrxD0HtieHhW0NCG7M536uHGOtJ95Ut2) |
-| Basic LLM knowledge      | [Introduction to Large Language Models](https://www.youtube.com/watch?v=GQ_2OjNZ9aA&list=PLlrxD0HtieHi5ZpsHULPLxm839IrhmeDk&index=2)                                                                             |
+| Basic LLM knowledge      | [Introduction to Large Language Models](https://www.youtube.com/watch?v=GQ_2OjNZ9aA&list=PLlrxD0HtieHi5ZpsHULPLxm839IrhmeDk&index=2) |
 
 </div>
 

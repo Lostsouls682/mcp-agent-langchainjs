@@ -10,7 +10,7 @@ We now have a working deployed application, but deploying it manually every time
 
 ### What's CI/CD?
 
-CI/CD stands for _Continuous Integration and Continuous Deployment_.
+CI/CD stands for *Continuous Integration and Continuous Deployment*.
 
 Continuous Integration is a software development practice that requires developers to integrate their code into a shared repository several times a day. Each integration can then be verified by an automated build and automated tests. By doing so, you can detect errors quickly, and locate them more easily.
 
@@ -88,7 +88,6 @@ azd pipeline config
 ```
 
 You'll first be asked to log in to GitHub and then it will do the setup for you. These are the steps it will perform:
-
 - Creation of an [Azure Service Principal](https://learn.microsoft.com/entra/identity-platform/app-objects-and-service-principals?tabs=browser) to authenticate to Azure.
 - Set up OpenID Connect authentication between GitHub and Azure using [federated credentials](https://docs.github.com/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-azure).
 - Addition of [GitHub variables](https://docs.github.com/actions/learn-github-actions/variables) to your repository to store the IDs needed to authenticate to Azure.
@@ -117,7 +116,6 @@ gh variable set AZURE_OPENAI_ALT_ENDPOINT --body "$$proxy$$"
 <div class="important" data-title="important">
 
 > If you're using a custom OpenAI endpoint, make sure to set these variables in your repository using the [GitHub CLI](https://cli.github.com/):
->
 > ```bash
 > # Log in as we need more permissions than provided by default with Codespaces
 > unset GITHUB_TOKEN

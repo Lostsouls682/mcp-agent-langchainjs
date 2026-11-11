@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="description" content="Contoso Burgers Membership Registration" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>Contoso Burgers Registration</title>
+    <meta name="description" content="Join Tom's Playground and start chatting with Playground Assistant." />
+    <link rel="icon" type="image/svg+xml" href="/assets/toms-playground-icon.svg" />
+    <title>Tom's Playground — Registration</title>
     <style>
       .register {
-        background: #999;
-        background-image: radial-gradient(circle at center, #999 0%, #444 100%);
-        font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+        background: #201a36;
+        background-image: radial-gradient(circle at center, #403265 0%, #201a36 100%);
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
 
         azc-auth {
           display: flex;
@@ -23,6 +23,15 @@
         h1 {
           color: #fff;
           text-shadow: 0 1px 0px rgba(0, 0, 0, 0.5);
+          text-align: center;
+          padding: 0 1rem;
+        }
+
+        .registration-logo {
+          display: block;
+          width: min(300px, 80vw);
+          height: auto;
+          margin: 0 auto 1rem;
         }
       }
     </style>
@@ -30,7 +39,10 @@
   </head>
   <body class="register">
     <azc-auth loginRedirect="/register.html">
-      <h1 slot="login-title">Contoso Burgers Membership Registration</h1>
+      <h1 slot="login-title">
+        <img class="registration-logo" src="/assets/toms-playground-logo.svg" alt="" width="300" height="72" />
+        Join Tom's Playground
+      </h1>
       <azc-user-card type="full"></azc-user-card>
     </azc-auth>
     <script type="module" src="/src/index.ts"></script>

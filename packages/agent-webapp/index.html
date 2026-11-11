@@ -3,15 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="description" content="Contoso Burgers AI Agent" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>Contoso Burgers AI Agent</title>
+    <meta name="description" content="Tom's Playground AI chat — explore the burger menu and place orders with Playground Assistant." />
+    <link rel="icon" type="image/svg+xml" href="/assets/toms-playground-icon.svg" />
+    <title>Tom's Playground — AI Chat</title>
     <link rel="stylesheet" href="/src/styles.css" />
   </head>
   <body>
-    <nav>
-      <img src="/favicon.png" alt="" />
-      Contoso Burgers AI Agent
+    <nav aria-label="Main navigation">
+      <a class="brand" href="/" aria-label="Tom's Playground home">
+        <img class="brand-wordmark" src="/assets/toms-playground-logo.svg" alt="Tom's Playground" width="300" height="72" />
+        <img class="brand-icon" src="/assets/toms-playground-icon.svg" alt="Tom's Playground" width="48" height="48" />
+      </a>
       <div class="spacer"></div>
       <azc-auth type="guard">
         <azc-user-card></azc-user-card>
@@ -26,7 +28,16 @@
     </main>
     <script type="module" src="/src/index.ts"></script>
     <script type="module">
-      import { initUserSession } from '/src/index.ts';
+      import { initUserSession, chatDefaultOptions } from '/src/index.ts';
+      const chat = document.getElementById('chat');
+      chat.options = {
+        ...chatDefaultOptions,
+        strings: {
+          ...chatDefaultOptions.strings,
+          assistant: 'Playground Assistant',
+          promptSuggestionsTitle: "Welcome to Tom's Playground — explore our burger menu",
+        },
+      };
       await initUserSession();
     </script>
   </body>

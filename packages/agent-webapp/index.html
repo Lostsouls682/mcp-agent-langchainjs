@@ -15,19 +15,18 @@
         <img class="brand-icon" src="/assets/toms-playground-icon.svg" alt="Tom's Playground" width="48" height="48" />
       </a>
       <div class="spacer"></div>
-      <azc-auth type="guard">
-        <azc-user-card></azc-user-card>
-      </azc-auth>
+      <azc-auth type="guard"><azc-user-card></azc-user-card></azc-auth>
       <azc-auth type="status"></azc-auth>
     </nav>
     <main>
       <azc-auth>
         <azc-history id="chatHistory"></azc-history>
-        <azc-chat id="chat"></azc-chat>
+        <sleek-chat id="chat"></sleek-chat>
       </azc-auth>
     </main>
     <script type="module" src="/src/index.ts"></script>
     <script type="module">
+      import '/src/components/sleek-chat.ts';
       import { initUserSession, chatDefaultOptions } from '/src/index.ts';
       const chat = document.getElementById('chat');
       chat.options = {
@@ -35,7 +34,7 @@
         strings: {
           ...chatDefaultOptions.strings,
           assistant: 'Playground Assistant',
-          promptSuggestionsTitle: "Welcome to Tom's Playground — explore our burger menu",
+          promptSuggestionsTitle: 'Explore the menu, customize your burger, or let me help you order.',
         },
       };
       await initUserSession();

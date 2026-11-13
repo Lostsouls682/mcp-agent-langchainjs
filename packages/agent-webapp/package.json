@@ -15,7 +15,8 @@
     "dev": "vite --port 5174 --host",
     "build": "vite build",
     "preview": "vite preview",
-    "clean": "npx rimraf dist"
+    "clean": "npx rimraf dist",
+    "deploy:production": "npm run build && swa deploy ./dist --env production"
   },
   "author": "Microsoft",
   "license": "MIT",

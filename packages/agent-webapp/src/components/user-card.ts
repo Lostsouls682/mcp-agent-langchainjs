@@ -4,7 +4,6 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { getUserInfo } from '../services/auth.service.js';
 import { getUserId } from '../services/user.service.js';
 import copySvg from '../../assets/icons/copy.svg?raw';
-import burgerOutlineSvg from '../../assets/icons/burger-outline.svg?raw';
 import cardSvg from '../../assets/icons/card.svg?raw';
 
 export type UserCardType = 'button' | 'full';
@@ -93,9 +92,9 @@ export class UserCard extends LitElement {
 
   protected renderRegistrationCard = () => html`
     <div class="card card-shine">
-      <span class="burger">${unsafeSVG(burgerOutlineSvg)}</span>
+      <span class="playground-mark" aria-hidden="true">✦</span>
       <div class="card-content">
-        <h1>Contoso Burgers</h1>
+        <h1>Tom's Playground</h1>
         <h2>Membership Card</h2>
         <p>Card attributed to:</p>
         <div><pre>${this.username}</pre></div>
@@ -168,9 +167,11 @@ export class UserCard extends LitElement {
 
   static override styles = css`
     :host {
-      --azc-primary: linear-gradient(135deg, #de471d 0%, #ff6b3d 100%);
+      --member-card-accent: var(--azc-primary, #6554db);
+      --member-card-bg: linear-gradient(135deg, var(--member-card-accent) 0%, #4b6bdd 100%);
       --azc-border-radius: 16px;
       color: #fff;
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
     }
     .member-card-link {
       background: none;
@@ -188,7 +189,11 @@ export class UserCard extends LitElement {
       font-size: inherit;
     }
     .member-card-link:hover {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(123, 108, 255, 0.2);
+    }
+    button:focus-visible {
+      outline: 2px solid #bdb4ff;
+      outline-offset: 4px;
     }
     .card-icon {
       display: inline-block;
@@ -200,7 +205,7 @@ export class UserCard extends LitElement {
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: rgba(0, 0, 0, 0.7);
+      background-color: rgba(25, 29, 48, 0.7);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -213,7 +218,8 @@ export class UserCard extends LitElement {
       max-width: 640px;
       width: 100%;
       max-height: 90vh;
-      background: var(--azc-primary);
+      overflow-y: auto;
+      background: var(--member-card-bg);
       border-radius: var(--azc-border-radius, 16px);
     }
     .close-button {
@@ -243,55 +249,49 @@ export class UserCard extends LitElement {
       width: 100%;
     }
     h1 {
-      font-size: 2em;
+      font-size: clamp(1.5rem, 5vw, 2rem);
       color: #fff;
       margin: 0;
+      padding-right: 2rem;
       font-weight: 600;
-      text-transform: uppercase;
-    }
-    h1,
-    h2 {
-      font-family: 'Sofia Sans Condensed', sans-serif;
-    }
-    h1,
-    h2,
-    pre,
-    .warning {
-      text-shadow: 0 1px 0px rgba(0, 0, 0, 0.5);
+      letter-spacing: -0.04em;
     }
     .card {
       position: relative;
-      background: var(--azc-primary);
+      background: var(--member-card-bg);
       border-radius: var(--azc-border-radius);
       padding: 2rem;
-      box-shadow:
-        0 0 0 1px rgba(0, 0, 0, 0.2),
-        -1px -1px 1px rgba(255, 255, 255, 0.3),
-        2px 4px 8px rgba(0, 0, 0, 0.4);
-      font-family: 'Sofia Sans Condensed', sans-serif;
+      box-shadow: 0 4px 24px rgb(33 42 73 / 15%);
       text-align: left;
       width: 100%;
       box-sizing: border-box;
       color: #fff;
-      font-size: 1.2rem;
+      font-size: 1rem;
 
       h2 {
-        font-size: 1em;
-        margin: 0;
+        font-size: 0.75rem;
+        margin: 0.75rem 0 0;
         font-weight: 600;
-        font-style: italic;
+        letter-spacing: 0.18em;
         text-transform: uppercase;
+        color: #edebff;
       }
       pre {
-        font-size: 1.5rem;
+        font-family: inherit;
+        font-size: 1.25rem;
         font-weight: 600;
         margin: 0;
         white-space: normal;
-        line-break: anywhere;
+        overflow-wrap: anywhere;
       }
       p {
-        margin: 1.5rem 0 0 0;
+        margin: 1.5rem 0 0.5rem;
+        color: #edebff;
       }
+    }
+    .card-content {
+      position: relative;
+      z-index: 1;
     }
     .card-shine {
       --shine-deg: 45deg;
@@ -308,7 +308,7 @@ export class UserCard extends LitElement {
         #ffffff30 51%,
         transparent 56%,
         transparent 100%
-      );
+      ), var(--member-card-bg);
       background-size:
         250% 250%,
         100% 100%;
@@ -319,28 +319,30 @@ export class UserCard extends LitElement {
         90% 0,
         0 0;
     }
-    .burger {
-      z-index: 1;
-      width: 10rem;
-      height: 10rem;
-      display: inline-block;
-      vertical-align: middle;
-      opacity: 0.4;
+    .playground-mark {
+      display: block;
       position: absolute;
-      right: -1rem;
-      top: 3.5rem;
+      right: 1.5rem;
+      top: 5rem;
+      font-size: 8rem;
+      line-height: 1;
+      opacity: 0.12;
       pointer-events: none;
-      clip-path: inset(0 1rem 0 0);
     }
     .user-id-row {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      border: 1px solid #ffffff;
+      border: 1px solid #ffffff60;
+      background: #ffffff15;
       padding: 1rem;
       border-radius: calc(var(--azc-border-radius) / 2);
       margin: 0.5rem 0;
+    }
+    .user-id {
+      flex: 1;
+      min-width: 0;
     }
     .copy-button {
       background: none;
@@ -348,6 +350,7 @@ export class UserCard extends LitElement {
       cursor: pointer;
       padding: 0.3rem;
       display: flex;
+      flex-shrink: 0;
       align-items: center;
       border-radius: 4px;
       transition: background 0.2s;
@@ -362,8 +365,33 @@ export class UserCard extends LitElement {
       vertical-align: middle;
       color: #fff;
     }
+    .warning {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #edebff;
+    }
     .message {
       padding: 1em;
+    }
+    @media (width < 480px) {
+      .modal-overlay {
+        padding: 1rem;
+      }
+      .card {
+        padding: 1.5rem;
+      }
+      .user-id-row {
+        padding: 0.75rem;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition: none !important;
+      }
+      .card-shine:hover {
+        background-position: 0% 0, 0 0;
+      }
     }
     .visually-hidden {
       position: absolute;
